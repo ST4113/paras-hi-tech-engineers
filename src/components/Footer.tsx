@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { LinkedIn, Mail, Phone, MapPin } from 'lucide-react';
+import { Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -19,7 +18,7 @@ const Footer = () => {
                 rel="noopener noreferrer" 
                 className="text-white hover:text-orange"
               >
-                <LinkedIn size={20} />
+                <Linkedin size={20} />
               </a>
               <a 
                 href="mailto:info@parashitech.com" 

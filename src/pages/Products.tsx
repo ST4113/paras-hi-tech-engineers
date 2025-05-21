@@ -19,8 +19,8 @@ interface Product {
 
 const Products: React.FC = () => {
   const { toast } = useToast();
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [selectedBrand, setSelectedBrand] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedBrand, setSelectedBrand] = useState<string>("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -82,8 +82,8 @@ const Products: React.FC = () => {
 
   // Filter products based on selected filters
   const filteredProducts = productsData.filter(product => {
-    const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
-    const matchesBrand = selectedBrand ? product.brand === selectedBrand : true;
+    const matchesCategory = selectedCategory === "all" ? true : product.category === selectedCategory;
+    const matchesBrand = selectedBrand === "all" ? true : product.brand === selectedBrand;
     return matchesCategory && matchesBrand;
   });
 
@@ -101,8 +101,8 @@ const Products: React.FC = () => {
   };
 
   const clearFilters = () => {
-    setSelectedCategory("");
-    setSelectedBrand("");
+    setSelectedCategory("all");
+    setSelectedBrand("all");
   };
 
   return (
@@ -123,7 +123,7 @@ const Products: React.FC = () => {
                   <SelectValue placeholder="Select Category" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Categories</SelectItem>
+                  <SelectItem value="all">All Categories</SelectItem>
                   {categories.map(category => (
                     <SelectItem key={category} value={category}>{category}</SelectItem>
                   ))}
@@ -137,7 +137,7 @@ const Products: React.FC = () => {
                   <SelectValue placeholder="Select Brand" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Brands</SelectItem>
+                  <SelectItem value="all">All Brands</SelectItem>
                   {brands.map(brand => (
                     <SelectItem key={brand} value={brand}>{brand}</SelectItem>
                   ))}

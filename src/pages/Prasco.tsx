@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
@@ -69,9 +68,9 @@ const Prasco: React.FC = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <img 
-              src="/lovable-uploads/58e04ccd-4be8-4847-841e-3aa9f3ec1119.png" 
+              src="/lovable-uploads/a774b307-ef76-4e9e-9049-0e3510dffca1.png" 
               alt="Prasco Logo" 
-              className="h-20 mx-auto mb-8"
+              className="h-24 mx-auto mb-8"
             />
             <h1 className="text-5xl font-bold mb-6">PRASCO</h1>
             <p className="text-xl mb-4 font-medium">DELIVERING EXCELLENCE</p>

@@ -12,79 +12,147 @@ interface Product {
   id: number;
   name: string;
   image: string;
-  category: string;
-  brand: string;
+  manufacturer: string;
+  machineType: string;
+  partName: string;
+  model: string;
+  partNumber: string;
   description: string;
 }
 
 const Products: React.FC = () => {
   const { toast } = useToast();
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedBrand, setSelectedBrand] = useState<string>("all");
+  const [selectedManufacturer, setSelectedManufacturer] = useState<string>("all");
+  const [selectedMachineType, setSelectedMachineType] = useState<string>("all");
+  const [selectedPartName, setSelectedPartName] = useState<string>("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // Sample product data (in a real app, this would come from an API)
+  // Sample product data based on the provided table
   const productsData: Product[] = [
     {
       id: 1,
-      name: "Excavator Bucket Tooth",
-      image: "/placeholder.svg",
-      category: "Excavator Parts",
-      brand: "Komastu",
-      description: "Heavy-duty excavator bucket teeth designed for extreme digging conditions."
+      name: "VOLVO EC 480 Radiator",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "VOLVO",
+      machineType: "EXCAVATOR",
+      partName: "RADIATOR",
+      model: "EC 480",
+      partNumber: "456789",
+      description: "High-quality radiator for VOLVO EC 480 excavator with enhanced cooling capacity."
     },
     {
       id: 2,
-      name: "Engine Piston Assembly",
-      image: "/placeholder.svg",
-      category: "Engine Spares",
-      brand: "Caterpillar",
-      description: "High-performance piston assembly for industrial engines."
+      name: "VOLVO FMX 460 Condenser",
+      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
+      manufacturer: "VOLVO",
+      machineType: "TIPPER",
+      partName: "CONDENSER",
+      model: "FMX 460",
+      partNumber: "7812345",
+      description: "Premium condenser for VOLVO FMX 460 tipper with superior cooling performance."
     },
     {
       id: 3,
-      name: "Industrial Radiator",
-      image: "/placeholder.svg",
-      category: "Cooling Systems",
-      brand: "Hitachi",
-      description: "Heavy-duty radiator for industrial machinery with enhanced cooling capacity."
+      name: "KOMATSU D 155 Radiator",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "KOMATSU",
+      machineType: "DOZER",
+      partName: "RADIATOR",
+      model: "D 155",
+      partNumber: "8765432190",
+      description: "Heavy-duty radiator for KOMATSU D 155 dozer designed for extreme conditions."
     },
     {
       id: 4,
-      name: "Hydraulic Pump",
-      image: "/placeholder.svg",
-      category: "Hydraulic Systems",
-      brand: "Komastu",
-      description: "High-pressure hydraulic pump for construction equipment."
+      name: "HITACHI ZAXIS 470 Radiator",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "HITACHI",
+      machineType: "EXCAVATOR",
+      partName: "RADIATOR",
+      model: "ZAXIS 470",
+      partNumber: "2345678",
+      description: "Advanced radiator for HITACHI ZAXIS 470 excavator with optimal cooling efficiency."
     },
     {
       id: 5,
-      name: "Track Chain Assembly",
-      image: "/placeholder.svg",
-      category: "Excavator Parts",
-      brand: "Caterpillar",
-      description: "Durable track chain assembly for excavators and bulldozers."
+      name: "CATERPILLAR 120 K2 Radiator",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "CATERPILLAR",
+      machineType: "MOTOR GRADER",
+      partName: "RADIATOR",
+      model: "120 K2",
+      partNumber: "A9876599",
+      description: "Durable radiator for CATERPILLAR 120 K2 motor grader with enhanced performance."
     },
     {
       id: 6,
-      name: "Oil Filter",
-      image: "/placeholder.svg",
-      category: "Engine Spares",
-      brand: "Hitachi",
-      description: "Premium quality oil filter for heavy machinery engines."
+      name: "VOLVO FMX 460 Blower Motor",
+      image: "https://images.unsplash.com/photo-1659179277258-1f37efdb7d7d?q=80&w=1974&auto=format&fit=crop",
+      manufacturer: "VOLVO",
+      machineType: "TIPPER",
+      partName: "BLOWER MOTOR",
+      model: "FMX 460",
+      partNumber: "2345678",
+      description: "High-performance blower motor for VOLVO FMX 460 tipper with reliable operation."
+    },
+    {
+      id: 7,
+      name: "VOLVO FMX 460 Evaporator",
+      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
+      manufacturer: "VOLVO",
+      machineType: "TIPPER",
+      partName: "EVAPORATOR",
+      model: "FMX 460",
+      partNumber: "23458768",
+      description: "Premium evaporator for VOLVO FMX 460 tipper with superior cooling performance."
+    },
+    {
+      id: 8,
+      name: "VOLVO FMX 440 Condenser",
+      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
+      manufacturer: "VOLVO",
+      machineType: "TIPPER",
+      partName: "CONDENSER",
+      model: "FMX 440",
+      partNumber: "7812345",
+      description: "High-quality condenser for VOLVO FMX 440 tipper with excellent cooling capacity."
+    },
+    {
+      id: 9,
+      name: "VOLVO FMX 460 Radiator",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "VOLVO",
+      machineType: "TIPPER",
+      partName: "RADIATOR",
+      model: "FMX 460",
+      partNumber: "21649619",
+      description: "Durable radiator for VOLVO FMX 460 tipper with enhanced cooling performance."
+    },
+    {
+      id: 10,
+      name: "VOLVO FMX 440 Radiator",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "VOLVO",
+      machineType: "TIPPER",
+      partName: "RADIATOR",
+      model: "FMX 440",
+      partNumber: "21649619",
+      description: "Reliable radiator for VOLVO FMX 440 tipper with superior cooling technology."
     }
   ];
 
-  // Get unique categories and brands for filters
-  const categories = [...new Set(productsData.map(product => product.category))];
-  const brands = [...new Set(productsData.map(product => product.brand))];
+  // Get unique values for filters
+  const manufacturers = [...new Set(productsData.map(product => product.manufacturer))];
+  const machineTypes = [...new Set(productsData.map(product => product.machineType))];
+  const partNames = [...new Set(productsData.map(product => product.partName))];
 
   // Filter products based on selected filters
   const filteredProducts = productsData.filter(product => {
-    const matchesCategory = selectedCategory === "all" ? true : product.category === selectedCategory;
-    const matchesBrand = selectedBrand === "all" ? true : product.brand === selectedBrand;
-    return matchesCategory && matchesBrand;
+    const matchesManufacturer = selectedManufacturer === "all" ? true : product.manufacturer === selectedManufacturer;
+    const matchesMachineType = selectedMachineType === "all" ? true : product.machineType === selectedMachineType;
+    const matchesPartName = selectedPartName === "all" ? true : product.partName === selectedPartName;
+    return matchesManufacturer && matchesMachineType && matchesPartName;
   });
 
   const handleInquireClick = (product: Product) => {
@@ -101,8 +169,9 @@ const Products: React.FC = () => {
   };
 
   const clearFilters = () => {
-    setSelectedCategory("all");
-    setSelectedBrand("all");
+    setSelectedManufacturer("all");
+    setSelectedMachineType("all");
+    setSelectedPartName("all");
   };
 
   return (
@@ -115,31 +184,45 @@ const Products: React.FC = () => {
         {/* Filters */}
         <div className="mb-8 bg-gray-50 p-6 rounded-lg shadow-sm">
           <h2 className="text-xl font-semibold mb-4 text-navy">Filter Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Category</label>
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <label className="block text-sm font-medium mb-2">Manufacturer</label>
+              <Select value={selectedManufacturer} onValueChange={setSelectedManufacturer}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select Category" />
+                  <SelectValue placeholder="Select Manufacturer" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  {categories.map(category => (
-                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                  <SelectItem value="all">All Manufacturers</SelectItem>
+                  {manufacturers.map(manufacturer => (
+                    <SelectItem key={manufacturer} value={manufacturer}>{manufacturer}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Brand</label>
-              <Select value={selectedBrand} onValueChange={setSelectedBrand}>
+              <label className="block text-sm font-medium mb-2">Machine Type</label>
+              <Select value={selectedMachineType} onValueChange={setSelectedMachineType}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select Brand" />
+                  <SelectValue placeholder="Select Machine Type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Brands</SelectItem>
-                  {brands.map(brand => (
-                    <SelectItem key={brand} value={brand}>{brand}</SelectItem>
+                  <SelectItem value="all">All Machine Types</SelectItem>
+                  {machineTypes.map(machineType => (
+                    <SelectItem key={machineType} value={machineType}>{machineType}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Part Name</label>
+              <Select value={selectedPartName} onValueChange={setSelectedPartName}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Part Name" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Part Names</SelectItem>
+                  {partNames.map(partName => (
+                    <SelectItem key={partName} value={partName}>{partName}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>

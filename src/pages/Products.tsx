@@ -18,6 +18,8 @@ interface Product {
   model: string;
   partNumber: string;
   description: string;
+  category: string;
+  brand: string;
 }
 
 const Products: React.FC = () => {
@@ -39,7 +41,9 @@ const Products: React.FC = () => {
       partName: "RADIATOR",
       model: "EC 480",
       partNumber: "456789",
-      description: "High-quality radiator for VOLVO EC 480 excavator with enhanced cooling capacity."
+      description: "High-quality radiator for VOLVO EC 480 excavator with enhanced cooling capacity.",
+      category: "Cooling Systems",
+      brand: "VOLVO"
     },
     {
       id: 2,
@@ -50,7 +54,9 @@ const Products: React.FC = () => {
       partName: "CONDENSER",
       model: "FMX 460",
       partNumber: "7812345",
-      description: "Premium condenser for VOLVO FMX 460 tipper with superior cooling performance."
+      description: "Premium condenser for VOLVO FMX 460 tipper with superior cooling performance.",
+      category: "Air Conditioning",
+      brand: "VOLVO"
     },
     {
       id: 3,
@@ -61,7 +67,9 @@ const Products: React.FC = () => {
       partName: "RADIATOR",
       model: "D 155",
       partNumber: "8765432190",
-      description: "Heavy-duty radiator for KOMATSU D 155 dozer designed for extreme conditions."
+      description: "Heavy-duty radiator for KOMATSU D 155 dozer designed for extreme conditions.",
+      category: "Cooling Systems",
+      brand: "KOMATSU"
     },
     {
       id: 4,
@@ -72,7 +80,9 @@ const Products: React.FC = () => {
       partName: "RADIATOR",
       model: "ZAXIS 470",
       partNumber: "2345678",
-      description: "Advanced radiator for HITACHI ZAXIS 470 excavator with optimal cooling efficiency."
+      description: "Advanced radiator for HITACHI ZAXIS 470 excavator with optimal cooling efficiency.",
+      category: "Cooling Systems",
+      brand: "HITACHI"
     },
     {
       id: 5,
@@ -83,7 +93,9 @@ const Products: React.FC = () => {
       partName: "RADIATOR",
       model: "120 K2",
       partNumber: "A9876599",
-      description: "Durable radiator for CATERPILLAR 120 K2 motor grader with enhanced performance."
+      description: "Durable radiator for CATERPILLAR 120 K2 motor grader with enhanced performance.",
+      category: "Cooling Systems",
+      brand: "CATERPILLAR"
     },
     {
       id: 6,
@@ -94,7 +106,9 @@ const Products: React.FC = () => {
       partName: "BLOWER MOTOR",
       model: "FMX 460",
       partNumber: "2345678",
-      description: "High-performance blower motor for VOLVO FMX 460 tipper with reliable operation."
+      description: "High-performance blower motor for VOLVO FMX 460 tipper with reliable operation.",
+      category: "Air Conditioning",
+      brand: "VOLVO"
     },
     {
       id: 7,
@@ -105,7 +119,9 @@ const Products: React.FC = () => {
       partName: "EVAPORATOR",
       model: "FMX 460",
       partNumber: "23458768",
-      description: "Premium evaporator for VOLVO FMX 460 tipper with superior cooling performance."
+      description: "Premium evaporator for VOLVO FMX 460 tipper with superior cooling performance.",
+      category: "Air Conditioning",
+      brand: "VOLVO"
     },
     {
       id: 8,
@@ -116,7 +132,9 @@ const Products: React.FC = () => {
       partName: "CONDENSER",
       model: "FMX 440",
       partNumber: "7812345",
-      description: "High-quality condenser for VOLVO FMX 440 tipper with excellent cooling capacity."
+      description: "High-quality condenser for VOLVO FMX 440 tipper with excellent cooling capacity.",
+      category: "Air Conditioning",
+      brand: "VOLVO"
     },
     {
       id: 9,
@@ -127,7 +145,9 @@ const Products: React.FC = () => {
       partName: "RADIATOR",
       model: "FMX 460",
       partNumber: "21649619",
-      description: "Durable radiator for VOLVO FMX 460 tipper with enhanced cooling performance."
+      description: "Durable radiator for VOLVO FMX 460 tipper with enhanced cooling performance.",
+      category: "Cooling Systems",
+      brand: "VOLVO"
     },
     {
       id: 10,
@@ -138,7 +158,9 @@ const Products: React.FC = () => {
       partName: "RADIATOR",
       model: "FMX 440",
       partNumber: "21649619",
-      description: "Reliable radiator for VOLVO FMX 440 tipper with superior cooling technology."
+      description: "Reliable radiator for VOLVO FMX 440 tipper with superior cooling technology.",
+      category: "Cooling Systems",
+      brand: "VOLVO"
     }
   ];
 

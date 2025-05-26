@@ -13,6 +13,8 @@ interface Product {
   model: string;
   partNumber: string;
   description: string;
+  category: string;
+  brand: string;
 }
 
 interface ProductCardProps {

@@ -1,9 +1,20 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleExploreProducts = () => {
+    navigate('/products');
+  };
+
+  const handleContactUs = () => {
+    navigate('/contact');
+  };
+
   return (
     <section className="relative w-full bg-gradient py-16 md:py-24">
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1527674979-4bdd6ec37065?q=80&w=1887&auto=format&fit=crop')] bg-cover bg-center opacity-15"></div>
@@ -18,10 +29,17 @@ const Hero = () => {
               and all industrial machine components. Built to last with precision engineering.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button className="bg-orange hover:bg-orange/90 text-white px-6 py-6 text-base">
+              <Button 
+                onClick={handleExploreProducts}
+                className="bg-orange hover:bg-orange/90 text-white px-6 py-6 text-base"
+              >
                 Explore Products
               </Button>
-              <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 px-6 py-6 text-base">
+              <Button 
+                onClick={handleContactUs}
+                variant="outline" 
+                className="bg-transparent border-white text-white hover:bg-white/10 px-6 py-6 text-base"
+              >
                 Contact Us <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>

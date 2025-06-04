@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
 
 const services = [
   {
@@ -46,9 +45,6 @@ const Services = () => {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-gray-600">{service.description}</CardDescription>
-                <a href="#" className="inline-flex items-center mt-4 text-orange hover:text-navy">
-                  Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
               </CardContent>
             </Card>
           ))}

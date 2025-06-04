@@ -1,36 +1,43 @@
 
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const productCategories = [
   {
+    id: 1,
     name: "Excavator Parts",
     image: "https://images.unsplash.com/photo-1508352483487-5d0cc50a1e4a?q=80&w=2070&auto=format&fit=crop",
     description: "High-quality bucket teeth, pins, bushings, hydraulic cylinders, and track components."
   },
   {
+    id: 2,
     name: "Engine Spares",
     image: "https://images.unsplash.com/photo-1595584298134-52e3fe339c91?q=80&w=1974&auto=format&fit=crop",
     description: "Premium engine components including pistons, liners, valves, and gasket kits."
   },
   {
+    id: 3,
     name: "Radiators & Cooling",
     image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
     description: "Advanced cooling systems, radiators, and temperature control components."
   },
   {
+    id: 4,
     name: "Hydraulic Systems",
     image: "https://images.unsplash.com/photo-1590323767270-47e05a116013?q=80&w=1974&auto=format&fit=crop",
     description: "Hydraulic pumps, motors, valves, cylinders, and hoses for various machinery."
   },
   {
+    id: 5,
     name: "Electrical Components",
     image: "https://images.unsplash.com/photo-1659179277258-1f37efdb7d7d?q=80&w=1974&auto=format&fit=crop",
     description: "Sensors, controllers, wiring harnesses, and electronic control modules."
   },
   {
+    id: 6,
     name: "Filtration Systems",
     image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
     description: "Air, fuel, oil, and hydraulic filters for optimal machine performance."
@@ -38,6 +45,7 @@ const productCategories = [
 ];
 
 const Products = () => {
+  const navigate = useNavigate();
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -46,6 +54,14 @@ const Products = () => {
       const scrollAmount = direction === 'left' ? -current.offsetWidth : current.offsetWidth;
       current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
+  };
+
+  const handleViewDetails = (productId: number) => {
+    navigate(`/product/${productId}`);
+  };
+
+  const handleViewAllProducts = () => {
+    navigate('/products');
   };
 
   return (
@@ -97,7 +113,11 @@ const Products = () => {
               <CardContent className="p-6">
                 <h3 className="font-bold text-lg mb-2 text-navy">{product.name}</h3>
                 <p className="text-gray-600 text-sm mb-4">{product.description}</p>
-                <Button variant="outline" className="border-orange text-orange hover:bg-orange hover:text-white">
+                <Button 
+                  onClick={() => handleViewDetails(product.id)}
+                  variant="outline" 
+                  className="border-orange text-orange hover:bg-orange hover:text-white"
+                >
                   View Details
                 </Button>
               </CardContent>
@@ -106,7 +126,10 @@ const Products = () => {
         </div>
         
         <div className="mt-10 text-center">
-          <Button className="bg-orange hover:bg-orange/90 text-white">
+          <Button 
+            onClick={handleViewAllProducts}
+            className="bg-orange hover:bg-orange/90 text-white"
+          >
             View All Products
           </Button>
         </div>

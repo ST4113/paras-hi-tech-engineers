@@ -1,23 +1,123 @@
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ProductInquiryDialog from "@/components/ProductInquiryDialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Mail, MapPin, Star, Award, Users, Target } from "lucide-react";
+import { Phone, Mail, MapPin, Star, Award, Users, Target, Eye } from "lucide-react";
+
+interface Product {
+  id: number;
+  name: string;
+  image: string;
+  manufacturer: string;
+  machineType: string;
+  partName: string;
+  model: string;
+  partNumber: string;
+  description: string;
+  category: string;
+  brand: string;
+}
 
 const Prasco: React.FC = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [inquiryForm, setInquiryForm] = useState({
     name: '',
     email: '',
     phone: '',
     message: ''
   });
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  // Prasco product data
+  const prascoProducts: Product[] = [
+    {
+      id: 101,
+      name: "Prasco Premium Engine Radiator",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "ENGINE",
+      partName: "RADIATOR",
+      model: "PRX-500",
+      partNumber: "PRC123456",
+      description: "High-performance engine radiator engineered for excellence and maximum cooling efficiency in heavy-duty applications.",
+      category: "Engine Components",
+      brand: "PRASCO"
+    },
+    {
+      id: 102,
+      name: "Prasco Hydraulic Pump Assembly",
+      image: "https://images.unsplash.com/photo-1659179277258-1f37efdb7d7d?q=80&w=1974&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "HYDRAULIC",
+      partName: "PUMP",
+      model: "PHX-750",
+      partNumber: "PRC789012",
+      description: "Complete hydraulic pump assembly designed for maximum efficiency and reliability in demanding conditions.",
+      category: "Hydraulic Systems",
+      brand: "PRASCO"
+    },
+    {
+      id: 103,
+      name: "Prasco Smart Cooling Condenser",
+      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "COOLING",
+      partName: "CONDENSER",
+      model: "PSC-900",
+      partNumber: "PRC345678",
+      description: "Innovative cooling condenser with smart temperature management capabilities and IoT connectivity.",
+      category: "Cooling Technology",
+      brand: "PRASCO"
+    },
+    {
+      id: 104,
+      name: "Prasco Elite Excavator Filter",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "EXCAVATOR",
+      partName: "FILTER",
+      model: "PEX-1200",
+      partNumber: "PRC901234",
+      description: "Premium excavator filter built to withstand the toughest conditions with advanced filtration technology.",
+      category: "Heavy Machinery",
+      brand: "PRASCO"
+    },
+    {
+      id: 105,
+      name: "Prasco Advanced Transmission Unit",
+      image: "https://images.unsplash.com/photo-1659179277258-1f37efdb7d7d?q=80&w=1974&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "TRANSMISSION",
+      partName: "GEARBOX",
+      model: "PAT-800",
+      partNumber: "PRC567890",
+      description: "Advanced transmission unit with precision engineering for optimal power transfer and durability.",
+      category: "Transmission Systems",
+      brand: "PRASCO"
+    },
+    {
+      id: 106,
+      name: "Prasco Pro Compressor Assembly",
+      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "COMPRESSOR",
+      partName: "ASSEMBLY",
+      model: "PPC-600",
+      partNumber: "PRC234567",
+      description: "Professional-grade compressor assembly designed for continuous operation and maximum efficiency.",
+      category: "Air Systems",
+      brand: "PRASCO"
+    }
+  ];
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,36 +128,23 @@ const Prasco: React.FC = () => {
     setInquiryForm({ name: '', email: '', phone: '', message: '' });
   };
 
-  const prascoProducts = [
-    {
-      id: 1,
-      name: "Prasco Premium Engine Parts",
-      category: "Engine Components",
-      description: "High-performance engine parts engineered for excellence and durability.",
-      features: ["Advanced Materials", "Precision Engineering", "Extended Warranty"]
-    },
-    {
-      id: 2,
-      name: "Prasco Hydraulic Solutions",
-      category: "Hydraulic Systems",
-      description: "Complete hydraulic solutions designed for maximum efficiency and reliability.",
-      features: ["High Pressure Rating", "Corrosion Resistant", "Easy Maintenance"]
-    },
-    {
-      id: 3,
-      name: "Prasco Smart Cooling Systems",
-      category: "Cooling Technology",
-      description: "Innovative cooling systems with smart temperature management capabilities.",
-      features: ["Smart Controls", "Energy Efficient", "IoT Enabled"]
-    },
-    {
-      id: 4,
-      name: "Prasco Elite Excavator Components",
-      category: "Heavy Machinery",
-      description: "Premium excavator parts built to withstand the toughest conditions.",
-      features: ["Heavy Duty Construction", "Weather Resistant", "Performance Optimized"]
-    }
-  ];
+  const handleViewProduct = (product: Product) => {
+    navigate(`/product/${product.id}`);
+  };
+
+  const handleInquireNow = (product: Product) => {
+    setSelectedProduct(product);
+    setIsDialogOpen(true);
+  };
+
+  const handleInquirySubmit = () => {
+    setIsDialogOpen(false);
+    setSelectedProduct(null);
+    toast({
+      title: "Inquiry Sent",
+      description: "Thank you for your inquiry. We will get back to you soon!",
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50">
@@ -122,37 +209,53 @@ const Prasco: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {prascoProducts.map(product => (
-                <Card key={product.id} className="border-2 border-transparent hover:border-cyan-300 transition-all duration-300 shadow-lg hover:shadow-xl bg-white">
-                  <CardHeader>
+                <Card key={product.id} className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg border-2 border-transparent hover:border-cyan-300 bg-white">
+                  <div className="relative pb-[60%] bg-gray-100">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                  <CardHeader className="pb-2">
                     <div className="flex justify-between items-start mb-2">
                       <Badge className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-white">
                         {product.category}
                       </Badge>
                       <Star className="w-5 h-5 text-yellow-500 fill-current" />
                     </div>
-                    <CardTitle className="text-xl text-gray-800">{product.name}</CardTitle>
-                    <CardDescription className="text-gray-600">{product.description}</CardDescription>
+                    <CardTitle className="text-lg font-semibold line-clamp-2 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                      {product.name}
+                    </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pb-4 flex-grow">
                     <div className="space-y-2 mb-4">
-                      <h4 className="font-semibold text-gray-700">Key Features:</h4>
-                      <ul className="space-y-1">
-                        {product.features.map((feature, index) => (
-                          <li key={index} className="flex items-center text-sm text-gray-600">
-                            <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full mr-2"></div>
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
+                      <p className="text-sm text-gray-600"><span className="font-medium">Manufacturer:</span> {product.manufacturer}</p>
+                      <p className="text-sm text-gray-600"><span className="font-medium">Machine Type:</span> {product.machineType}</p>
+                      <p className="text-sm text-gray-600"><span className="font-medium">Model:</span> {product.model}</p>
+                      <p className="text-sm text-gray-600"><span className="font-medium">Part Name:</span> {product.partName}</p>
+                      <p className="text-sm text-gray-600"><span className="font-medium">Part Number:</span> {product.partNumber}</p>
                     </div>
-                    <Button 
-                      className="w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600 text-white"
-                      onClick={() => toast({ title: "Product Inquiry", description: "Prasco representative will contact you soon!" })}
-                    >
-                      Request Quote
-                    </Button>
+                    <p className="text-sm text-gray-700 line-clamp-3 mb-4">{product.description}</p>
+                    
+                    <div className="space-y-2">
+                      <Button 
+                        onClick={() => handleViewProduct(product)}
+                        className="w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600 text-white"
+                      >
+                        <Eye className="w-4 h-4 mr-2" />
+                        View Product
+                      </Button>
+                      <Button 
+                        onClick={() => handleInquireNow(product)}
+                        variant="outline"
+                        className="w-full border-emerald-500 text-emerald-600 hover:bg-emerald-50"
+                      >
+                        Inquire Now
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -355,6 +458,14 @@ const Prasco: React.FC = () => {
         </Tabs>
       </main>
 
+      {selectedProduct && (
+        <ProductInquiryDialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          product={selectedProduct}
+          onSubmit={handleInquirySubmit}
+        />
+      )}
       <Footer />
     </div>
   );

@@ -240,22 +240,13 @@ const Prasco: React.FC = () => {
                     </div>
                     <p className="text-sm text-gray-700 line-clamp-3 mb-4">{product.description}</p>
                     
-                    <div className="space-y-2">
-                      <Button 
-                        onClick={() => handleViewProduct(product)}
-                        className="w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600 text-white"
-                      >
-                        <Eye className="w-4 h-4 mr-2" />
-                        View Product
-                      </Button>
-                      <Button 
-                        onClick={() => handleInquireNow(product)}
-                        variant="outline"
-                        className="w-full border-emerald-500 text-emerald-600 hover:bg-emerald-50"
-                      >
-                        Inquire Now
-                      </Button>
-                    </div>
+                    <Button 
+                      onClick={() => handleViewProduct(product)}
+                      className="w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600 text-white"
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      View Details
+                    </Button>
                   </CardContent>
                 </Card>
               ))}

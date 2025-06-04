@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
@@ -8,6 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductInquiryDialog from "@/components/ProductInquiryDialog";
+import PrascoProductInquiryDialog from "@/components/PrascoProductInquiryDialog";
 
 interface Product {
   id: number;
@@ -163,7 +163,91 @@ const ProductDetail: React.FC = () => {
     }
   ];
 
-  const product = productsData.find(p => p.id === parseInt(id || '0'));
+  // Add Prasco products data
+  const prascoProducts: Product[] = [
+    {
+      id: 101,
+      name: "Prasco Premium Engine Radiator",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "ENGINE",
+      partName: "RADIATOR",
+      model: "PRX-500",
+      partNumber: "PRC123456",
+      description: "High-performance engine radiator engineered for excellence and maximum cooling efficiency in heavy-duty applications.",
+      category: "Engine Components",
+      brand: "PRASCO"
+    },
+    {
+      id: 102,
+      name: "Prasco Hydraulic Pump Assembly",
+      image: "https://images.unsplash.com/photo-1659179277258-1f37efdb7d7d?q=80&w=1974&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "HYDRAULIC",
+      partName: "PUMP",
+      model: "PHX-750",
+      partNumber: "PRC789012",
+      description: "Complete hydraulic pump assembly designed for maximum efficiency and reliability in demanding conditions.",
+      category: "Hydraulic Systems",
+      brand: "PRASCO"
+    },
+    {
+      id: 103,
+      name: "Prasco Smart Cooling Condenser",
+      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "COOLING",
+      partName: "CONDENSER",
+      model: "PSC-900",
+      partNumber: "PRC345678",
+      description: "Innovative cooling condenser with smart temperature management capabilities and IoT connectivity.",
+      category: "Cooling Technology",
+      brand: "PRASCO"
+    },
+    {
+      id: 104,
+      name: "Prasco Elite Excavator Filter",
+      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "EXCAVATOR",
+      partName: "FILTER",
+      model: "PEX-1200",
+      partNumber: "PRC901234",
+      description: "Premium excavator filter built to withstand the toughest conditions with advanced filtration technology.",
+      category: "Heavy Machinery",
+      brand: "PRASCO"
+    },
+    {
+      id: 105,
+      name: "Prasco Advanced Transmission Unit",
+      image: "https://images.unsplash.com/photo-1659179277258-1f37efdb7d7d?q=80&w=1974&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "TRANSMISSION",
+      partName: "GEARBOX",
+      model: "PAT-800",
+      partNumber: "PRC567890",
+      description: "Advanced transmission unit with precision engineering for optimal power transfer and durability.",
+      category: "Transmission Systems",
+      brand: "PRASCO"
+    },
+    {
+      id: 106,
+      name: "Prasco Pro Compressor Assembly",
+      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
+      manufacturer: "PRASCO",
+      machineType: "COMPRESSOR",
+      partName: "ASSEMBLY",
+      model: "PPC-600",
+      partNumber: "PRC234567",
+      description: "Professional-grade compressor assembly designed for continuous operation and maximum efficiency.",
+      category: "Air Systems",
+      brand: "PRASCO"
+    }
+  ];
+
+  // Combine all products
+  const allProducts = [...productsData, ...prascoProducts];
+  const product = allProducts.find(p => p.id === parseInt(id || '0'));
 
   if (!product) {
     return (
@@ -181,6 +265,8 @@ const ProductDetail: React.FC = () => {
       </div>
     );
   }
+
+  const isPrascoProduct = product.brand === 'PRASCO';
 
   const handleInquireClick = () => {
     setIsDialogOpen(true);
@@ -277,12 +363,21 @@ const ProductDetail: React.FC = () => {
 
       <Footer />
 
-      <ProductInquiryDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        product={product}
-        onSubmit={handleFormSubmit}
-      />
+      {isPrascoProduct ? (
+        <PrascoProductInquiryDialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          product={product}
+          onSubmit={handleFormSubmit}
+        />
+      ) : (
+        <ProductInquiryDialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          product={product}
+          onSubmit={handleFormSubmit}
+        />
+      )}
     </div>
   );
 };

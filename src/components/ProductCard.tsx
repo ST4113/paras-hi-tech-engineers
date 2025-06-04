@@ -19,10 +19,10 @@ interface Product {
 
 interface ProductCardProps {
   product: Product;
-  onInquire: () => void;
+  onView: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onInquire }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onView }) => {
   return (
     <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-md">
       <div className="relative pb-[60%] bg-gray-100">
@@ -47,10 +47,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onInquire }) => {
       </CardContent>
       <CardFooter>
         <Button 
-          onClick={onInquire} 
+          onClick={onView} 
           className="w-full bg-orange hover:bg-orange/90 text-white"
         >
-          Inquire Now
+          View Details
         </Button>
       </CardFooter>
     </Card>

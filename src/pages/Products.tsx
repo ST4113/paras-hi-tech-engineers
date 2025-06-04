@@ -1,10 +1,8 @@
-
 import React, { useState } from 'react';
-import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from 'react-router-dom';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import ProductInquiryDialog from "@/components/ProductInquiryDialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 
@@ -23,12 +21,10 @@ interface Product {
 }
 
 const Products: React.FC = () => {
-  const { toast } = useToast();
+  const navigate = useNavigate();
   const [selectedManufacturer, setSelectedManufacturer] = useState<string>("all");
   const [selectedMachineType, setSelectedMachineType] = useState<string>("all");
   const [selectedPartName, setSelectedPartName] = useState<string>("all");
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Sample product data based on the provided table
   const productsData: Product[] = [
@@ -177,17 +173,8 @@ const Products: React.FC = () => {
     return matchesManufacturer && matchesMachineType && matchesPartName;
   });
 
-  const handleInquireClick = (product: Product) => {
-    setSelectedProduct(product);
-    setIsDialogOpen(true);
-  };
-
-  const handleFormSubmit = () => {
-    setIsDialogOpen(false);
-    toast({
-      title: "Inquiry Sent",
-      description: "Thank you for your inquiry. We will get back to you soon!",
-    });
+  const handleViewClick = (product: Product) => {
+    navigate(`/product/${product.id}`);
   };
 
   const clearFilters = () => {
@@ -268,7 +255,7 @@ const Products: React.FC = () => {
               <ProductCard 
                 key={product.id} 
                 product={product} 
-                onInquire={() => handleInquireClick(product)} 
+                onView={() => handleViewClick(product)} 
               />
             ))
           ) : (
@@ -283,15 +270,6 @@ const Products: React.FC = () => {
       </main>
 
       <Footer />
-
-      {selectedProduct && (
-        <ProductInquiryDialog
-          isOpen={isDialogOpen}
-          onClose={() => setIsDialogOpen(false)}
-          product={selectedProduct}
-          onSubmit={handleFormSubmit}
-        />
-      )}
     </div>
   );
 };

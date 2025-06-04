@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
@@ -281,23 +282,26 @@ const ProductDetail: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className={`min-h-screen flex flex-col ${isPrascoProduct ? 'bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50' : ''}`}>
       <Navbar />
       
       <main className="flex-grow container mx-auto px-4 py-8">
         <Button 
-          onClick={() => navigate('/products')} 
+          onClick={() => navigate(isPrascoProduct ? '/prasco' : '/products')} 
           variant="outline" 
-          className="mb-6 border-navy text-navy hover:bg-navy hover:text-white"
+          className={isPrascoProduct ? 
+            "mb-6 border-emerald-500 text-emerald-600 hover:bg-emerald-50" : 
+            "mb-6 border-navy text-navy hover:bg-navy hover:text-white"
+          }
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Products
+          Back to {isPrascoProduct ? 'Prasco' : 'Products'}
         </Button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Product Image */}
           <div className="space-y-4">
-            <div className="relative pb-[75%] bg-gray-100 rounded-lg overflow-hidden">
+            <div className={`relative pb-[75%] bg-gray-100 rounded-lg overflow-hidden ${isPrascoProduct ? 'border-2 border-cyan-200' : ''}`}>
               <img 
                 src={product.image} 
                 alt={product.name}
@@ -309,13 +313,23 @@ const ProductDetail: React.FC = () => {
           {/* Product Details */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2 text-navy">{product.name}</h1>
+              <h1 className={`text-3xl font-bold mb-2 ${isPrascoProduct ? 
+                'bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent' : 
+                'text-navy'
+              }`}>
+                {product.name}
+              </h1>
               <p className="text-lg text-gray-600">{product.description}</p>
             </div>
 
-            <Card>
+            <Card className={isPrascoProduct ? 'bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 border-2 border-cyan-200' : ''}>
               <CardHeader>
-                <h2 className="text-xl font-semibold text-navy">Product Specifications</h2>
+                <h2 className={`text-xl font-semibold ${isPrascoProduct ? 
+                  'bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent' : 
+                  'text-navy'
+                }`}>
+                  Product Specifications
+                </h2>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="grid grid-cols-2 gap-4">
@@ -353,7 +367,10 @@ const ProductDetail: React.FC = () => {
 
             <Button 
               onClick={handleInquireClick}
-              className="w-full bg-orange hover:bg-orange/90 text-white text-lg py-6"
+              className={isPrascoProduct ? 
+                "w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600 text-white text-lg py-6 font-semibold" :
+                "w-full bg-orange hover:bg-orange/90 text-white text-lg py-6"
+              }
             >
               Inquire Now
             </Button>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
@@ -9,7 +8,6 @@ const navItems = [
   { label: 'Products', href: '/products' },
   { label: 'About Us', href: '/about' },
   { label: 'Prasco', href: '/prasco' },
-  { label: 'News and Updates', href: '/news' },
   { label: 'Contact Us', href: '/contact' },
 ];
 

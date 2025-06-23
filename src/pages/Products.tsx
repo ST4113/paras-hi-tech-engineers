@@ -25,6 +25,7 @@ const Products: React.FC = () => {
   const [selectedManufacturer, setSelectedManufacturer] = useState<string>("all");
   const [selectedMachineType, setSelectedMachineType] = useState<string>("all");
   const [selectedPartName, setSelectedPartName] = useState<string>("all");
+  const [selectedModel, setSelectedModel] = useState<string>("all");
 
   // Sample product data based on the provided table
   const productsData: Product[] = [
@@ -164,13 +165,15 @@ const Products: React.FC = () => {
   const manufacturers = [...new Set(productsData.map(product => product.manufacturer))];
   const machineTypes = [...new Set(productsData.map(product => product.machineType))];
   const partNames = [...new Set(productsData.map(product => product.partName))];
+  const models = [...new Set(productsData.map(product => product.model))];
 
   // Filter products based on selected filters
   const filteredProducts = productsData.filter(product => {
     const matchesManufacturer = selectedManufacturer === "all" ? true : product.manufacturer === selectedManufacturer;
     const matchesMachineType = selectedMachineType === "all" ? true : product.machineType === selectedMachineType;
     const matchesPartName = selectedPartName === "all" ? true : product.partName === selectedPartName;
-    return matchesManufacturer && matchesMachineType && matchesPartName;
+    const matchesModel = selectedModel === "all" ? true : product.model === selectedModel;
+    return matchesManufacturer && matchesMachineType && matchesPartName && matchesModel;
   });
 
   const handleViewClick = (product: Product) => {
@@ -181,6 +184,7 @@ const Products: React.FC = () => {
     setSelectedManufacturer("all");
     setSelectedMachineType("all");
     setSelectedPartName("all");
+    setSelectedModel("all");
   };
 
   return (
@@ -193,7 +197,7 @@ const Products: React.FC = () => {
         {/* Filters */}
         <div className="mb-8 bg-gray-50 p-6 rounded-lg shadow-sm">
           <h2 className="text-xl font-semibold mb-4 text-navy">Filter Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             <div>
               <label className="block text-sm font-medium mb-2">Manufacturer</label>
               <Select value={selectedManufacturer} onValueChange={setSelectedManufacturer}>
@@ -232,6 +236,20 @@ const Products: React.FC = () => {
                   <SelectItem value="all">All Part Names</SelectItem>
                   {partNames.map(partName => (
                     <SelectItem key={partName} value={partName}>{partName}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Model</label>
+              <Select value={selectedModel} onValueChange={setSelectedModel}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Model" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Models</SelectItem>
+                  {models.map(model => (
+                    <SelectItem key={model} value={model}>{model}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>

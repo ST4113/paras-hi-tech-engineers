@@ -29,10 +29,10 @@ interface Product {
 const Prasco: React.FC = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [selectedManufacturer, setSelectedManufacturer] = useState<string>("all");
   const [selectedMachineType, setSelectedMachineType] = useState<string>("all");
-  const [selectedPartName, setSelectedPartName] = useState<string>("all");
+  const [selectedManufacturer, setSelectedManufacturer] = useState<string>("all");
   const [selectedModel, setSelectedModel] = useState<string>("all");
+  const [selectedPartName, setSelectedPartName] = useState<string>("all");
   const [inquiryForm, setInquiryForm] = useState({
     name: '',
     email: '',
@@ -124,26 +124,64 @@ const Prasco: React.FC = () => {
     }
   ];
 
-  // Get unique values for filters
-  const manufacturers = [...new Set(prascoProducts.map(product => product.manufacturer))];
+  // Get unique values for filters based on selections
   const machineTypes = [...new Set(prascoProducts.map(product => product.machineType))];
-  const partNames = [...new Set(prascoProducts.map(product => product.partName))];
-  const models = [...new Set(prascoProducts.map(product => product.model))];
+  
+  const manufacturers = selectedMachineType === "all" 
+    ? [] 
+    : [...new Set(prascoProducts
+        .filter(product => product.machineType === selectedMachineType)
+        .map(product => product.manufacturer))];
+  
+  const models = selectedManufacturer === "all" 
+    ? [] 
+    : [...new Set(prascoProducts
+        .filter(product => 
+          product.machineType === selectedMachineType && 
+          product.manufacturer === selectedManufacturer)
+        .map(product => product.model))];
+  
+  const partNames = selectedModel === "all" 
+    ? [] 
+    : [...new Set(prascoProducts
+        .filter(product => 
+          product.machineType === selectedMachineType && 
+          product.manufacturer === selectedManufacturer &&
+          product.model === selectedModel)
+        .map(product => product.partName))];
 
   // Filter products based on selected filters
   const filteredProducts = prascoProducts.filter(product => {
-    const matchesManufacturer = selectedManufacturer === "all" ? true : product.manufacturer === selectedManufacturer;
     const matchesMachineType = selectedMachineType === "all" ? true : product.machineType === selectedMachineType;
-    const matchesPartName = selectedPartName === "all" ? true : product.partName === selectedPartName;
+    const matchesManufacturer = selectedManufacturer === "all" ? true : product.manufacturer === selectedManufacturer;
     const matchesModel = selectedModel === "all" ? true : product.model === selectedModel;
-    return matchesManufacturer && matchesMachineType && matchesPartName && matchesModel;
+    const matchesPartName = selectedPartName === "all" ? true : product.partName === selectedPartName;
+    return matchesMachineType && matchesManufacturer && matchesModel && matchesPartName;
   });
 
   const clearFilters = () => {
-    setSelectedManufacturer("all");
     setSelectedMachineType("all");
-    setSelectedPartName("all");
+    setSelectedManufacturer("all");
     setSelectedModel("all");
+    setSelectedPartName("all");
+  };
+
+  const handleMachineTypeChange = (value: string) => {
+    setSelectedMachineType(value);
+    setSelectedManufacturer("all");
+    setSelectedModel("all");
+    setSelectedPartName("all");
+  };
+
+  const handleManufacturerChange = (value: string) => {
+    setSelectedManufacturer(value);
+    setSelectedModel("all");
+    setSelectedPartName("all");
+  };
+
+  const handleModelChange = (value: string) => {
+    setSelectedModel(value);
+    setSelectedPartName("all");
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -241,22 +279,8 @@ const Prasco: React.FC = () => {
               <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">Filter Prasco Products</h3>
               <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700">Manufacturer</label>
-                  <Select value={selectedManufacturer} onValueChange={setSelectedManufacturer}>
-                    <SelectTrigger className="w-full border-cyan-300 focus:border-emerald-500">
-                      <SelectValue placeholder="Select Manufacturer" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Manufacturers</SelectItem>
-                      {manufacturers.map(manufacturer => (
-                        <SelectItem key={manufacturer} value={manufacturer}>{manufacturer}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
                   <label className="block text-sm font-medium mb-2 text-gray-700">Machine Type</label>
-                  <Select value={selectedMachineType} onValueChange={setSelectedMachineType}>
+                  <Select value={selectedMachineType} onValueChange={handleMachineTypeChange}>
                     <SelectTrigger className="w-full border-cyan-300 focus:border-emerald-500">
                       <SelectValue placeholder="Select Machine Type" />
                     </SelectTrigger>
@@ -269,29 +293,55 @@ const Prasco: React.FC = () => {
                   </Select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700">Part Name</label>
-                  <Select value={selectedPartName} onValueChange={setSelectedPartName}>
-                    <SelectTrigger className="w-full border-cyan-300 focus:border-emerald-500">
-                      <SelectValue placeholder="Select Part Name" />
+                  <label className="block text-sm font-medium mb-2 text-gray-700">Manufacturer</label>
+                  <Select 
+                    value={selectedManufacturer} 
+                    onValueChange={handleManufacturerChange}
+                    disabled={selectedMachineType === "all"}
+                  >
+                    <SelectTrigger className={`w-full border-cyan-300 focus:border-emerald-500 ${selectedMachineType === "all" ? "opacity-50 cursor-not-allowed" : ""}`}>
+                      <SelectValue placeholder="Select Manufacturer" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Part Names</SelectItem>
-                      {partNames.map(partName => (
-                        <SelectItem key={partName} value={partName}>{partName}</SelectItem>
+                      <SelectItem value="all">All Manufacturers</SelectItem>
+                      {manufacturers.map(manufacturer => (
+                        <SelectItem key={manufacturer} value={manufacturer}>{manufacturer}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2 text-gray-700">Model</label>
-                  <Select value={selectedModel} onValueChange={setSelectedModel}>
-                    <SelectTrigger className="w-full border-cyan-300 focus:border-emerald-500">
+                  <Select 
+                    value={selectedModel} 
+                    onValueChange={handleModelChange}
+                    disabled={selectedManufacturer === "all"}
+                  >
+                    <SelectTrigger className={`w-full border-cyan-300 focus:border-emerald-500 ${selectedManufacturer === "all" ? "opacity-50 cursor-not-allowed" : ""}`}>
                       <SelectValue placeholder="Select Model" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">All Models</SelectItem>
                       {models.map(model => (
                         <SelectItem key={model} value={model}>{model}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-gray-700">Part Name</label>
+                  <Select 
+                    value={selectedPartName} 
+                    onValueChange={setSelectedPartName}
+                    disabled={selectedModel === "all"}
+                  >
+                    <SelectTrigger className={`w-full border-cyan-300 focus:border-emerald-500 ${selectedModel === "all" ? "opacity-50 cursor-not-allowed" : ""}`}>
+                      <SelectValue placeholder="Select Part Name" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Part Names</SelectItem>
+                      {partNames.map(partName => (
+                        <SelectItem key={partName} value={partName}>{partName}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

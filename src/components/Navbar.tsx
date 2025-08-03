@@ -25,24 +25,24 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <a href="/" className="flex items-center">
-              <img 
-                src="/lovable-uploads/6870fcf3-af78-41ac-9465-7e4e5084904b.png" 
-                alt="Paras Hi Tech Engineers Logo" 
+              <img
+                src="/images/6870fcf3-af78-41ac-9465-7e4e5084904b.png"
+                alt="Paras Hi Tech Engineers Logo"
                 className="h-12 w-auto"
               />
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-1 lg:space-x-4">
+          <nav className="hidden md:flex space-x-1 lg:space-x-6">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "px-3 py-2 text-sm font-medium transition-colors relative group",
-                  item.href === '/' 
-                    ? "text-navy" 
+                  "px-3 py-2 text-base font-semibold transition-colors relative group",
+                  item.href === '/'
+                    ? "text-navy"
                     : "text-gray-700 hover:text-orange"
                 )}
               >
@@ -50,10 +50,8 @@ const Navbar = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
-            <Button className="ml-2 bg-orange hover:bg-orange/90 text-white">
-              Request Quote
-            </Button>
           </nav>
+
 
           {/* Mobile menu button */}
           <div className="md:hidden">
@@ -79,9 +77,9 @@ const Navbar = () => {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "px-3 py-2 text-base font-medium block transition-colors",
-                    item.href === '/' 
-                      ? "text-navy" 
+                    "px-3 py-2 text-lg font-medium block transition-colors",
+                    item.href === '/'
+                      ? "text-navy"
                       : "text-gray-700 hover:text-orange"
                   )}
                   onClick={toggleMenu}
@@ -89,12 +87,13 @@ const Navbar = () => {
                   {item.label}
                 </a>
               ))}
-              <Button className="mx-3 bg-orange hover:bg-orange/90 text-white">
+              <Button className="mx-3 text-base bg-orange hover:bg-orange/90 text-white">
                 Request Quote
               </Button>
             </div>
           </div>
         )}
+
       </div>
     </header>
   );

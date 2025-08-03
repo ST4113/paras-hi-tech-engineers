@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,184 +5,123 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const About: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white text-gray-800">
       <Navbar />
-      
+
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="bg-gradient text-white py-20">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About Us</h1>
-            <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-              Your trusted partner in industrial machinery solutions since our inception
+        {/* Hero Banner */}
+        <section
+          className="relative flex items-center justify-center bg-cover bg-center bg-no-repeat py-20 sm:py-24 md:py-32 px-4"
+          style={{
+            backgroundImage: 'url("/images/hero-about.png")',
+          }}
+        >
+          <div className="text-center text-white max-w-2xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
+              About <span className="text-orange">Us</span>
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl opacity-90">
+              Your Trusted Partner in Industrial Machinery Solutions<br />Committed to Industrial Growth Through Quality, Consistency, and Technical Support
             </p>
           </div>
         </section>
 
         {/* Our Legacy Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-navy mb-8 text-center">Our Legacy</h2>
-              <div className="prose prose-lg mx-auto text-gray-700">
-                <p className="text-lg leading-relaxed mb-6">
-                  Paras Hi Tech Engineers has been at the forefront of industrial machinery solutions for over two decades. 
-                  Founded with a vision to provide high-quality, reliable parts and components, we have grown from a small 
-                  local business to a trusted name in the industry.
-                </p>
-                <p className="text-lg leading-relaxed mb-6">
-                  Our journey began with a simple mission: to ensure that industrial machinery operates at peak performance 
-                  with minimal downtime. Over the years, we have built strong relationships with manufacturers, suppliers, 
-                  and clients, establishing ourselves as a reliable partner in the industrial sector.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  Today, we serve a diverse clientele across various industries, from construction and mining to 
-                  manufacturing and agriculture, providing them with the parts and expertise they need to keep their 
-                  operations running smoothly.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Pictures Section */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-12 text-center">Our Facility</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Manufacturing Facility" 
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-navy mb-2">Manufacturing Facility</h3>
-                  <p className="text-gray-600">State-of-the-art manufacturing equipment ensuring precision and quality</p>
-                </div>
-              </div>
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Quality Control Lab" 
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-navy mb-2">Quality Control Lab</h3>
-                  <p className="text-gray-600">Advanced testing facilities to ensure every product meets our standards</p>
-                </div>
-              </div>
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img 
-                  src="/placeholder.svg" 
-                  alt="Warehouse" 
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-navy mb-2">Warehouse</h3>
-                  <p className="text-gray-600">Extensive inventory to meet immediate customer requirements</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Our Motto Section */}
-        <section className="py-16 bg-navy text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-8">Our Motto</h2>
-            <div className="max-w-3xl mx-auto">
-              <blockquote className="text-2xl md:text-3xl font-light italic mb-8">
-                "Excellence in Every Part, Trust in Every Service"
-              </blockquote>
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-6">
+            <div className="max-w-5xl mx-auto text-center">
+              <h2 className="text-4xl font-bold text-[#143355] mb-10">Our Legacy</h2>
+              <p className="text-lg leading-relaxed mb-6">
+                For over two decades, Paras Hi Tech Engineers has been a cornerstone of reliability and precision in the industrial machinery sector. From humble beginnings, our growth has been powered by our commitment to quality and customer satisfaction.
+              </p>
+              <p className="text-lg leading-relaxed mb-6">
+                With a vision rooted in excellence, we provide top-tier parts and support to ensure your machinery performs at its best. Our relationships span global manufacturers to grassroots clients—each one backed by trust and technical integrity.
+              </p>
               <p className="text-lg leading-relaxed">
-                This motto reflects our unwavering commitment to delivering superior quality products and services. 
-                Every component we supply and every service we provide is backed by our dedication to excellence 
-                and our promise to earn and maintain your trust.
+                Today, our name is synonymous with industry leadership, powering sectors including construction, mining, and manufacturing.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Our Commitment Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-12 text-center">Our Commitment</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <Card className="text-center">
-                <CardHeader>
-                  <CardTitle className="text-xl text-navy">Quality Assurance</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    We are committed to providing only the highest quality parts and components, 
-                    rigorously tested to meet industry standards.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="text-center">
-                <CardHeader>
-                  <CardTitle className="text-xl text-navy">Customer Service</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    Our dedicated team provides exceptional customer service, ensuring your needs 
-                    are met with professionalism and efficiency.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="text-center">
-                <CardHeader>
-                  <CardTitle className="text-xl text-navy">Innovation</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    We continuously invest in new technologies and processes to stay ahead of 
-                    industry trends and provide cutting-edge solutions.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="text-center">
-                <CardHeader>
-                  <CardTitle className="text-xl text-navy">Reliability</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    You can count on us for consistent, reliable supply of parts and services 
-                    that keep your operations running smoothly.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="text-center">
-                <CardHeader>
-                  <CardTitle className="text-xl text-navy">Environmental Responsibility</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    We are committed to sustainable practices and environmental stewardship 
-                    in all aspects of our business operations.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="text-center">
-                <CardHeader>
-                  <CardTitle className="text-xl text-navy">Partnership</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">
-                    We believe in building long-term partnerships with our clients, 
-                    working together towards mutual success and growth.
-                  </p>
-                </CardContent>
-              </Card>
+        {/* Pictures Section - Alternating Layout */}
+        <section className="py-20 bg-gray-100">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-[#143355] mb-14 text-center">Our Facility</h2>
+            <div className="space-y-20">
+              {[{
+                title: "Manufacturing Facility",
+                description: "State-of-the-art manufacturing equipment ensuring precision and quality",
+                image: "/placeholder.svg"
+              }, {
+                title: "Quality Sourcing",
+                description: "Global Standards, Locally Delivered. Precision-Sourced Components for Peak Industrial Performance",
+                image: "/placeholder.svg"
+              }, {
+                title: "Warehouse",
+                description: "Extensive Inventory, Immediate Dispatch. Supporting Your Operations Without Delay.",
+                image: "/placeholder.svg"
+              }].map((item, idx) => (
+                <div key={idx} className={`flex flex-col ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-10 bg-white rounded-2xl shadow-xl overflow-hidden hover:scale-[1.01] transition-transform`}>
+                  <img src={item.image} alt={item.title} className="w-full lg:w-1/2 h-72 object-cover" />
+                  <div className="p-6 text-center lg:text-left">
+                    <h3 className="text-2xl font-semibold text-[#143355] mb-3">{item.title}</h3>
+                    <p className="text-gray-700 text-base leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
+
+        {/* Core Values Section - Creative Layout */}
+        <section className="py-20 bg-[#f9fafb] text-[#143355] relative overflow-hidden">
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-6xl mx-auto text-center">
+              <h2 className="text-4xl font-bold mb-6">Core Values</h2>
+              <p className="text-xl font-medium mb-14 italic">
+                "Driven by <span className="text-[#d3791a] font-semibold">Precision</span>. Defined by <span className="text-[#d3791a] font-semibold">Reliability</span>. Dedicated to <span className="text-[#d3791a] font-semibold">Industry</span>."
+              </p>
+
+              <p>In industries where downtime is costly and precision is critical, we stand as a reliable partner. Our extensive experience in engineering services and machinery spares allows us to deliver not just products, but complete sourcing and support solutions. We are committed to helping our clients maintain operational continuity through quality, consistency, and technical reliability.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Commitment Section - Horizontal Grid */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-[#143355] mb-14 text-center">Our Commitment</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Quality Assurance",
+                  content:
+                    "We supply only genuine and precision-engineered parts, backed by strict quality checks and reliable sourcing.",
+                },
+                {
+                  title: "Customer Service",
+                  content:
+                    "We provide reliable technical support and after-sales service to help clients maintain operational continuity and reduce downtime.",
+                },
+                {
+                  title: "Innovation",
+                  content:
+                    "We invest in high-quality, precision-engineered spares offering long-term reliability and faster lead times.",
+                },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-[#f9fafb] p-6 rounded-xl shadow-md text-center hover:scale-[1.02] transition-transform"
+                >
+                  <h3 className="text-2xl font-bold text-[#143355] mb-2">{item.title}</h3>
+                  <p className="text-gray-700 text-base leading-relaxed">{item.content}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
       </main>
 
       <Footer />

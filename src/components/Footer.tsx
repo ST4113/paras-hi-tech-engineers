@@ -1,5 +1,6 @@
 import React from 'react';
-import { Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Linkedin, Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
+import WhatsappIcon from "@/components/ui/WhatsappIcon";
 
 const Footer = () => {
   return (
@@ -12,29 +13,29 @@ const Footer = () => {
               Your trusted partner for high-quality industrial machine spares and components.
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="https://www.linkedin.com/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white hover:text-orange"
               >
                 <Linkedin size={20} />
               </a>
-              <a 
-                href="mailto:info@parashitech.com" 
+              <a
+                href="mailto:info@parashitech.com"
                 className="text-white hover:text-orange"
               >
                 <Mail size={20} />
               </a>
-              <a 
-                href="tel:+911234567890" 
+              <a
+                href="tel:+911234567890"
                 className="text-white hover:text-orange"
               >
                 <Phone size={20} />
               </a>
             </div>
           </div>
-          
+
           <div>
             <h3 className="font-bold text-xl mb-4">Quick Links</h3>
             <ul className="space-y-2">
@@ -46,7 +47,7 @@ const Footer = () => {
               <li><a href="/contact" className="text-gray-300 hover:text-orange transition-colors">Contact Us</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-bold text-xl mb-4">Products</h3>
             <ul className="space-y-2">
@@ -58,34 +59,49 @@ const Footer = () => {
               <li><a href="#" className="text-gray-300 hover:text-orange transition-colors">Filtration Systems</a></li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-bold text-xl mb-4">Contact Us</h3>
             <div className="space-y-3">
               <div className="flex items-start">
                 <MapPin size={18} className="mr-2 mt-1 flex-shrink-0 text-orange" />
                 <p className="text-gray-300">
-                  123 Industrial Area, Sector 5<br />
-                  Mumbai, Maharashtra 400001<br />
-                  India
+                  55, Ashwamegh Industrial Estate, Sarkhej-Bavla Rd, Changodar, Gujarat 382210
                 </p>
               </div>
               <div className="flex items-center">
                 <Phone size={18} className="mr-2 flex-shrink-0 text-orange" />
-                <a href="tel:+911234567890" className="text-gray-300 hover:text-orange">
-                  +91 123 456 7890
-                </a>
+                <div className="flex flex-col">
+                  <a href="tel:+919712442299" className="text-gray-300 hover:text-orange">
+                    +91 9712442299
+                  </a>
+                  <a href="tel:+919276767601" className="text-gray-300 hover:text-orange">
+                    +91 9276767601
+                  </a>
+                </div>
               </div>
               <div className="flex items-center">
+                <WhatsappIcon className="w-5 h-5 mr-2 flex-shrink-0 text-[#F37021]" />
+                <a
+                  href="https://wa.me/919712442299?text=Hi%20Paras%20Hi%20Tech%20Engineers%2C%20I'm%20interested%20in%20your%20products."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-[#F37021]"
+                >
+                  +91 9712442299
+                </a>
+              </div>
+
+              <div className="flex items-center">
                 <Mail size={18} className="mr-2 flex-shrink-0 text-orange" />
-                <a href="mailto:info@parashitech.com" className="text-gray-300 hover:text-orange">
-                  info@parashitech.com
+                <a href="mailto:info@parashitech.in" className="text-gray-300 hover:text-orange">
+                  info@parashitech.in
                 </a>
               </div>
             </div>
           </div>
         </div>
-        
+
         <div className="mt-12 pt-8 border-t border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400">

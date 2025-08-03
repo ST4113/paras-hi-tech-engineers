@@ -221,7 +221,7 @@ const Prasco: React.FC = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <img 
-              src="/lovable-uploads/2f1c5dc4-1bbe-4593-a735-0ba5390ad70b.png" 
+              src="/images/2f1c5dc4-1bbe-4593-a735-0ba5390ad70b.png" 
               alt="Prasco Logo" 
               className="h-20 mx-auto mb-8 filter brightness-110"
             />

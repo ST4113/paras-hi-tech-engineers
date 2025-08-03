@@ -26,7 +26,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 flex items-center">
             <a href="/" className="flex items-center">
               <img
-                src="/images/6870fcf3-af78-41ac-9465-7e4e5084904b.png"
+                src="/images/paras-logo.png"
                 alt="Paras Hi Tech Engineers Logo"
                 className="h-12 w-auto"
               />

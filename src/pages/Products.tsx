@@ -6,32 +6,32 @@ const productCategories = [
   {
     title: "Engine Spares",
     description: "Durable and high-performance engine spares to keep your heavy machinery running reliably.",
-    image: "https://images.unsplash.com/photo-1581090700227-1e8cfc27c29a?q=80&w=2070&auto=format&fit=crop"
+    image: "/images/engine-spares.jpg"
   },
   {
     title: "Engine Gaskets",
     description: "Precision-engineered engine gaskets to ensure perfect seals and prevent leaks.",
-    image: "https://images.unsplash.com/photo-1631515243346-df573c408f5d?q=80&w=2070&auto=format&fit=crop"
+    image: "/images/engine-gasket.jpg"
   },
   {
     title: "Radiators and Hydraulic Oil Cooler",
     description: "Reliable radiators and hydraulic oil coolers for superior cooling in all conditions.",
-    image: "https://images.unsplash.com/photo-1617083727145-8ef34c3f3949?q=80&w=2070&auto=format&fit=crop"
+    image: "/images/radiator-cooler.jpg"
   },
   {
     title: "AC Spares",
     description: "High-quality AC components designed for maximum efficiency and comfort.",
-    image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop"
+    image: "/images/AC-spares.jpg"
   },
   {
     title: "Mining Truck Body Spares",
     description: "Heavy-duty body parts for mining trucks to ensure strength and reliability in tough environments.",
-    image: "https://images.unsplash.com/photo-1613758947301-78abf354cd83?q=80&w=2070&auto=format&fit=crop"
+    image: "/images/body-parts.jpg"
   },
   {
     title: "Industrial Electrical Components",
     description: "Advanced electrical components for robust industrial automation and power needs.",
-    image: "https://images.unsplash.com/photo-1581092787766-8be01c0e7804?q=80&w=2070&auto=format&fit=crop"
+    image: "/images/electrical.jpg"
   }
 ];
 

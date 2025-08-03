@@ -11,7 +11,7 @@ const About: React.FC = () => {
       <main className="flex-grow">
         {/* Hero Banner */}
         <section
-          className="relative flex items-center justify-center bg-cover bg-center bg-no-repeat py-20 sm:py-24 md:py-32 px-4"
+          className="relative flex items-center justify-center bg-cover bg-no-repeat py-20 sm:py-24 md:py-32 px-4"
           style={{
             backgroundImage: 'url("/images/hero-about.png")',
           }}
@@ -52,15 +52,15 @@ const About: React.FC = () => {
               {[{
                 title: "Manufacturing Facility",
                 description: "State-of-the-art manufacturing equipment ensuring precision and quality",
-                image: "/placeholder.svg"
+                image: "/images/manufacturing.png"
               }, {
                 title: "Quality Sourcing",
                 description: "Global Standards, Locally Delivered. Precision-Sourced Components for Peak Industrial Performance",
-                image: "/placeholder.svg"
+                image: "/images/quality.png"
               }, {
                 title: "Warehouse",
                 description: "Extensive Inventory, Immediate Dispatch. Supporting Your Operations Without Delay.",
-                image: "/placeholder.svg"
+                image: "/images/warehouse.jpg"
               }].map((item, idx) => (
                 <div key={idx} className={`flex flex-col ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-10 bg-white rounded-2xl shadow-xl overflow-hidden hover:scale-[1.01] transition-transform`}>
                   <img src={item.image} alt={item.title} className="w-full lg:w-1/2 h-72 object-cover" />

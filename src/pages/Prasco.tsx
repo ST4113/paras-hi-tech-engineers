@@ -250,7 +250,7 @@ const Prasco: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
               <div className="rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-300 hover:shadow-xl transition-all duration-300 hover:border-cyan-400">
                 <img 
-                  src="/images/radiator.png" 
+                  src="/images/AC-spares.jpg" 
                   alt="AC Parts" 
                   className="w-full h-56 object-cover"
                 />
@@ -282,7 +282,7 @@ const Prasco: React.FC = () => {
 
               <div className="rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-300 hover:shadow-xl transition-all duration-300 hover:border-cyan-400">
                 <img 
-                  src="/images/mine.png" 
+                  src="/images/body-parts.jpg" 
                   alt="Mining Truck Parts" 
                   className="w-full h-56 object-cover"
                 />
@@ -330,12 +330,12 @@ const Prasco: React.FC = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <Card className="p-4 text-center bg-white shadow-md border border-emerald-200">
                     <Award className="w-8 h-8 mx-auto mb-2 text-emerald-600" />
-                    <h4 className="font-bold text-lg text-gray-800">15+</h4>
+                    <h4 className="font-bold text-lg text-gray-800">20+</h4>
                     <p className="text-sm text-gray-600">Years of Excellence</p>
                   </Card>
                   <Card className="p-4 text-center bg-white shadow-md border border-cyan-200">
                     <Users className="w-8 h-8 mx-auto mb-2 text-cyan-600" />
-                    <h4 className="font-bold text-lg text-gray-800">500+</h4>
+                    <h4 className="font-bold text-lg text-gray-800">100%</h4>
                     <p className="text-sm text-gray-600">Satisfied Clients</p>
                   </Card>
                   <Card className="p-4 text-center bg-white shadow-md border border-blue-200">
@@ -375,53 +375,7 @@ const Prasco: React.FC = () => {
             </div>
           </section>
 
-          {/* Contact Section */}
-          <section className="space-y-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                Connect with Prasco
-              </h2>
-              <p className="text-lg text-gray-600">Ready to experience precision engineering? Contact our Prasco specialists</p>
-            </div>
-
-            <div className="flex justify-center py-20 bg-gradient-to-b from-slate-50 to-white">
-              <div className="w-full max-w-5xl px-4">
-                <Card className="p-6 bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 border border-cyan-200">
-                  <h3 className="text-xl font-bold mb-6 text-gray-800">Prasco Contact Information</h3>
-
-                  <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <MapPin className="w-5 h-5 text-emerald-600 mt-1" />
-                      <div>
-                        <h4 className="font-semibold text-gray-800">Prasco Division Address</h4>
-                        <p className="text-gray-600">
-                          Prasco Wing, Paras Hi Tech Engineers<br />
-                          Industrial Area, Sector 15<br />
-                          Faridabad, Haryana 121007, India
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center space-x-3">
-                      <Phone className="w-5 h-5 text-cyan-600" />
-                      <div>
-                        <h4 className="font-semibold text-gray-800">Prasco Direct Line</h4>
-                        <p className="text-gray-600">+91 129 4567 890</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center space-x-3">
-                      <Mail className="w-5 h-5 text-blue-600" />
-                      <div>
-                        <h4 className="font-semibold text-gray-800">Prasco Email</h4>
-                        <p className="text-gray-600">info@prasco.com</p>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-            </div>
-          </section>
+          
         </div>
       </main>
 

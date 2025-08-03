@@ -12,28 +12,6 @@ const Footer = () => {
             <p className="text-gray-300 mb-4">
               Your trusted partner for high-quality industrial machine spares and components.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-orange"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="mailto:info@parashitech.com"
-                className="text-white hover:text-orange"
-              >
-                <Mail size={20} />
-              </a>
-              <a
-                href="tel:+911234567890"
-                className="text-white hover:text-orange"
-              >
-                <Phone size={20} />
-              </a>
-            </div>
           </div>
 
           <div>
@@ -47,17 +25,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-bold text-xl mb-4">Products</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-orange transition-colors">Excavator Parts</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-orange transition-colors">Engine Spares</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-orange transition-colors">Radiators</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-orange transition-colors">Hydraulic Systems</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-orange transition-colors">Electrical Components</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-orange transition-colors">Filtration Systems</a></li>
-            </ul>
-          </div>
 
           <div>
             <h3 className="font-bold text-xl mb-4">Contact Us</h3>
@@ -97,6 +64,17 @@ const Footer = () => {
                   info@parashitech.in
                 </a>
               </div>
+              <div className="flex items-center">
+                <Linkedin size={18} className="mr-2 flex-shrink-0 text-orange" />
+                <a
+                  href="https://www.linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-orange"
+                >
+                  Paras Hi Tech Engineers
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -106,13 +84,6 @@ const Footer = () => {
             <p className="text-gray-400">
               &copy; {new Date().getFullYear()} Paras Hi Tech Engineers. All rights reserved.
             </p>
-            <div className="mt-4 md:mt-0">
-              <ul className="flex space-x-6">
-                <li><a href="#" className="text-gray-400 hover:text-orange text-sm">Privacy Policy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-orange text-sm">Terms of Service</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-orange text-sm">Sitemap</a></li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>

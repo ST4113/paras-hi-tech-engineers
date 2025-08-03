@@ -246,140 +246,55 @@ const Prasco: React.FC = () => {
               </p>
             </div>
 
-            {/* Filters with Prasco Theme */}
-            <div className="mb-8 bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 p-6 rounded-lg shadow-sm border border-cyan-200">
-              <h3 className="text-xl font-semibold mb-4 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">Filter Prasco Products</h3>
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700">Machine Type</label>
-                  <Select value={selectedMachineType} onValueChange={handleMachineTypeChange}>
-                    <SelectTrigger className="w-full border-cyan-300 focus:border-emerald-500">
-                      <SelectValue placeholder="Select Machine Type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Machine Types</SelectItem>
-                      {machineTypes.map(machineType => (
-                        <SelectItem key={machineType} value={machineType}>{machineType}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700">Manufacturer</label>
-                  <Select
-                    value={selectedManufacturer}
-                    onValueChange={handleManufacturerChange}
-                    disabled={selectedMachineType === "all"}
-                  >
-                    <SelectTrigger className={`w-full border-cyan-300 focus:border-emerald-500 ${selectedMachineType === "all" ? "opacity-50 cursor-not-allowed" : ""}`}>
-                      <SelectValue placeholder="Select Manufacturer" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Manufacturers</SelectItem>
-                      {manufacturers.map(manufacturer => (
-                        <SelectItem key={manufacturer} value={manufacturer}>{manufacturer}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700">Model</label>
-                  <Select
-                    value={selectedModel}
-                    onValueChange={handleModelChange}
-                    disabled={selectedManufacturer === "all"}
-                  >
-                    <SelectTrigger className={`w-full border-cyan-300 focus:border-emerald-500 ${selectedManufacturer === "all" ? "opacity-50 cursor-not-allowed" : ""}`}>
-                      <SelectValue placeholder="Select Model" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Models</SelectItem>
-                      {models.map(model => (
-                        <SelectItem key={model} value={model}>{model}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700">Part Name</label>
-                  <Select
-                    value={selectedPartName}
-                    onValueChange={setSelectedPartName}
-                    disabled={selectedModel === "all"}
-                  >
-                    <SelectTrigger className={`w-full border-cyan-300 focus:border-emerald-500 ${selectedModel === "all" ? "opacity-50 cursor-not-allowed" : ""}`}>
-                      <SelectValue placeholder="Select Part Name" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Part Names</SelectItem>
-                      {partNames.map(partName => (
-                        <SelectItem key={partName} value={partName}>{partName}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="flex items-end">
-                  <Button
-                    variant="outline"
-                    onClick={clearFilters}
-                    className="border-emerald-500 text-emerald-600 hover:bg-gradient-to-r hover:from-emerald-500 hover:via-cyan-500 hover:to-blue-500 hover:text-white"
-                  >
-                    Clear Filters
-                  </Button>
+            {/* Product Categories */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+              <div className="rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-300 hover:shadow-xl transition-all duration-300 hover:border-cyan-400">
+                <img 
+                  src="/images/radiator.png" 
+                  alt="AC Parts" 
+                  className="w-full h-56 object-cover"
+                />
+                <div className="p-6 bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50">
+                  <h3 className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent mb-2">
+                    AC Parts
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    High-quality AC components designed for maximum efficiency and comfort in heavy-duty applications.
+                  </p>
                 </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.length > 0 ? (
-                filteredProducts.map(product => (
-                  <Card key={product.id} className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg border-2 border-transparent hover:border-cyan-300 bg-white">
-                    <div className="relative pb-[60%] bg-gray-100">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                    </div>
-                    <CardHeader className="pb-2">
-                      <div className="flex justify-between items-start mb-2">
-                        <Badge className="bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-white">
-                          {product.category}
-                        </Badge>
-                        <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                      </div>
-                      <CardTitle className="text-lg font-semibold line-clamp-2 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                        {product.name}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pb-4 flex-grow">
-                      <div className="space-y-2 mb-4">
-                        <p className="text-sm text-gray-600"><span className="font-medium">Manufacturer:</span> {product.manufacturer}</p>
-                        <p className="text-sm text-gray-600"><span className="font-medium">Machine Type:</span> {product.machineType}</p>
-                        <p className="text-sm text-gray-600"><span className="font-medium">Model:</span> {product.model}</p>
-                        <p className="text-sm text-gray-600"><span className="font-medium">Part Name:</span> {product.partName}</p>
-                        <p className="text-sm text-gray-600"><span className="font-medium">Part Number:</span> {product.partNumber}</p>
-                      </div>
-                      <p className="text-sm text-gray-700 line-clamp-3 mb-4">{product.description}</p>
-
-                      <Button
-                        onClick={() => handleViewProduct(product)}
-                        className="w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600 text-white"
-                      >
-                        <Eye className="w-4 h-4 mr-2" />
-                        View Details
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))
-              ) : (
-                <div className="col-span-full text-center py-12">
-                  <p className="text-gray-500 text-lg">No Prasco products match your selected filters.</p>
-                  <Button onClick={clearFilters} variant="link" className="bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent mt-2">
-                    Clear filters to see all Prasco products
-                  </Button>
+              <div className="rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-300 hover:shadow-xl transition-all duration-300 hover:border-cyan-400">
+                <img 
+                  src="/images/radiator.png" 
+                  alt="Radiator" 
+                  className="w-full h-56 object-cover"
+                />
+                <div className="p-6 bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50">
+                  <h3 className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent mb-2">
+                    Radiator
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Reliable radiators and hydraulic oil coolers for superior cooling performance in all operating conditions.
+                  </p>
                 </div>
-              )}
+              </div>
+
+              <div className="rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-300 hover:shadow-xl transition-all duration-300 hover:border-cyan-400">
+                <img 
+                  src="/images/mine.png" 
+                  alt="Mining Truck Parts" 
+                  className="w-full h-56 object-cover"
+                />
+                <div className="p-6 bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50">
+                  <h3 className="text-2xl font-semibold bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent mb-2">
+                    Mining Truck Parts
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Heavy-duty body parts for mining trucks ensuring strength and reliability in tough mining environments.
+                  </p>
+                </div>
+              </div>
             </div>
           </section>
 

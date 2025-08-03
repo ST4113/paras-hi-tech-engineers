@@ -112,15 +112,22 @@ const About: React.FC = () => {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="bg-[#f9fafb] p-6 rounded-xl shadow-md text-center hover:scale-[1.02] transition-transform"
+                  className="p-6 border-2 border-[#d3791a] rounded-2xl bg-[#f9fafb] hover:bg-white hover:border-[#143355] transition-all duration-300 shadow-sm hover:shadow-lg"
                 >
-                  <h3 className="text-2xl font-bold text-[#143355] mb-2">{item.title}</h3>
-                  <p className="text-gray-700 text-base leading-relaxed">{item.content}</p>
+                  <h3 className="text-xl font-semibold text-[#143355] mb-4 text-center group-hover:text-[#d3791a]">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-700 text-base leading-relaxed text-center">
+                    {item.content}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
+
+
 
       </main>
 

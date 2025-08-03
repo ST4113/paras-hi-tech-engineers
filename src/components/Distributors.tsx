@@ -16,7 +16,7 @@ const distributors = [
   },
   {
     name: "Prasco",
-    logo: "/images/a774b307-ef76-4e9e-9049-0e3510dffca1.png",
+    logo: "/images/prasco.png",
   },
 ];
 

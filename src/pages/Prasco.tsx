@@ -126,29 +126,29 @@ const Prasco: React.FC = () => {
 
   // Get unique values for filters based on selections
   const machineTypes = [...new Set(prascoProducts.map(product => product.machineType))];
-  
-  const manufacturers = selectedMachineType === "all" 
-    ? [] 
+
+  const manufacturers = selectedMachineType === "all"
+    ? []
     : [...new Set(prascoProducts
-        .filter(product => product.machineType === selectedMachineType)
-        .map(product => product.manufacturer))];
-  
-  const models = selectedManufacturer === "all" 
-    ? [] 
+      .filter(product => product.machineType === selectedMachineType)
+      .map(product => product.manufacturer))];
+
+  const models = selectedManufacturer === "all"
+    ? []
     : [...new Set(prascoProducts
-        .filter(product => 
-          product.machineType === selectedMachineType && 
-          product.manufacturer === selectedManufacturer)
-        .map(product => product.model))];
-  
-  const partNames = selectedModel === "all" 
-    ? [] 
+      .filter(product =>
+        product.machineType === selectedMachineType &&
+        product.manufacturer === selectedManufacturer)
+      .map(product => product.model))];
+
+  const partNames = selectedModel === "all"
+    ? []
     : [...new Set(prascoProducts
-        .filter(product => 
-          product.machineType === selectedMachineType && 
-          product.manufacturer === selectedManufacturer &&
-          product.model === selectedModel)
-        .map(product => product.partName))];
+      .filter(product =>
+        product.machineType === selectedMachineType &&
+        product.manufacturer === selectedManufacturer &&
+        product.model === selectedModel)
+      .map(product => product.partName))];
 
   // Filter products based on selected filters
   const filteredProducts = prascoProducts.filter(product => {
@@ -214,28 +214,22 @@ const Prasco: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50">
       <Navbar />
-      
+
       {/* Hero Section with Prasco Theme */}
       <section className="relative py-20 bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-20"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <img 
-              src="/images/2f1c5dc4-1bbe-4593-a735-0ba5390ad70b.png" 
-              alt="Prasco Logo" 
+            <img
+              src="/images/prasco.png"
+              alt="Prasco Logo"
               className="h-20 mx-auto mb-8 filter brightness-110"
             />
             <p className="text-xl mb-4 font-medium text-white/90">DELIVERING EXCELLENCE</p>
             <p className="text-lg mb-8 opacity-90 text-white/80">
-              Advanced engineering solutions that set new standards in precision, quality, and innovation. 
+              Advanced engineering solutions that set new standards in precision, quality, and innovation.
               Experience the future of industrial excellence.
             </p>
-            <Button 
-              size="lg" 
-              className="bg-white text-cyan-600 hover:bg-gray-100 font-semibold px-8 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Discover Prasco Innovation
-            </Button>
           </div>
         </div>
       </section>
@@ -243,20 +237,20 @@ const Prasco: React.FC = () => {
       <main className="flex-grow">
         <Tabs defaultValue="products" className="container mx-auto px-4 py-12">
           <TabsList className="grid w-full grid-cols-3 mb-8 bg-gradient-to-r from-emerald-100 via-cyan-100 to-blue-100">
-            <TabsTrigger 
-              value="products" 
+            <TabsTrigger
+              value="products"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:text-white"
             >
               Prasco Products
             </TabsTrigger>
-            <TabsTrigger 
-              value="about" 
+            <TabsTrigger
+              value="about"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:text-white"
             >
               About Prasco
             </TabsTrigger>
-            <TabsTrigger 
-              value="contact" 
+            <TabsTrigger
+              value="contact"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:text-white"
             >
               Contact Info
@@ -294,8 +288,8 @@ const Prasco: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2 text-gray-700">Manufacturer</label>
-                  <Select 
-                    value={selectedManufacturer} 
+                  <Select
+                    value={selectedManufacturer}
                     onValueChange={handleManufacturerChange}
                     disabled={selectedMachineType === "all"}
                   >
@@ -312,8 +306,8 @@ const Prasco: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2 text-gray-700">Model</label>
-                  <Select 
-                    value={selectedModel} 
+                  <Select
+                    value={selectedModel}
                     onValueChange={handleModelChange}
                     disabled={selectedManufacturer === "all"}
                   >
@@ -330,8 +324,8 @@ const Prasco: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2 text-gray-700">Part Name</label>
-                  <Select 
-                    value={selectedPartName} 
+                  <Select
+                    value={selectedPartName}
                     onValueChange={setSelectedPartName}
                     disabled={selectedModel === "all"}
                   >
@@ -347,8 +341,8 @@ const Prasco: React.FC = () => {
                   </Select>
                 </div>
                 <div className="flex items-end">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     onClick={clearFilters}
                     className="border-emerald-500 text-emerald-600 hover:bg-gradient-to-r hover:from-emerald-500 hover:via-cyan-500 hover:to-blue-500 hover:text-white"
                   >
@@ -363,8 +357,8 @@ const Prasco: React.FC = () => {
                 filteredProducts.map(product => (
                   <Card key={product.id} className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg border-2 border-transparent hover:border-cyan-300 bg-white">
                     <div className="relative pb-[60%] bg-gray-100">
-                      <img 
-                        src={product.image} 
+                      <img
+                        src={product.image}
                         alt={product.name}
                         className="absolute inset-0 w-full h-full object-cover"
                       />
@@ -389,8 +383,8 @@ const Prasco: React.FC = () => {
                         <p className="text-sm text-gray-600"><span className="font-medium">Part Number:</span> {product.partNumber}</p>
                       </div>
                       <p className="text-sm text-gray-700 line-clamp-3 mb-4">{product.description}</p>
-                      
-                      <Button 
+
+                      <Button
                         onClick={() => handleViewProduct(product)}
                         className="w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600 text-white"
                       >
@@ -425,7 +419,7 @@ const Prasco: React.FC = () => {
                 <Card className="p-6 bg-gradient-to-br from-emerald-50 to-cyan-50 border-l-4 border-emerald-500">
                   <h3 className="text-xl font-bold mb-3 text-gray-800">Our Vision</h3>
                   <p className="text-gray-700">
-                    To be the premier brand in precision engineering solutions, establishing new benchmarks 
+                    To be the premier brand in precision engineering solutions, establishing new benchmarks
                     for quality, innovation, and technical excellence in industrial applications.
                   </p>
                 </Card>
@@ -433,7 +427,7 @@ const Prasco: React.FC = () => {
                 <Card className="p-6 bg-gradient-to-br from-cyan-50 to-blue-50 border-l-4 border-cyan-500">
                   <h3 className="text-xl font-bold mb-3 text-gray-800">Our Mission</h3>
                   <p className="text-gray-700">
-                    Delivering precision through innovative engineering solutions that surpass expectations, 
+                    Delivering precision through innovative engineering solutions that surpass expectations,
                     while maintaining uncompromising standards of quality and reliability.
                   </p>
                 </Card>
@@ -497,12 +491,12 @@ const Prasco: React.FC = () => {
               <p className="text-lg text-gray-600">Ready to experience precision engineering? Contact our Prasco specialists</p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="flex justify-center py-20 bg-gradient-to-b from-slate-50 to-white">
               {/* Contact Information */}
-              <div className="space-y-6">
+              <div className="w-full max-w-5xl px-4">
                 <Card className="p-6 bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 border border-cyan-200">
                   <h3 className="text-xl font-bold mb-6 text-gray-800">Prasco Contact Information</h3>
-                  
+
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3">
                       <MapPin className="w-5 h-5 text-emerald-600 mt-1" />
@@ -532,91 +526,29 @@ const Prasco: React.FC = () => {
                       </div>
                     </div>
                   </div>
-
-                  <div className="mt-6 p-4 bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 rounded-lg text-white">
-                    <h4 className="font-semibold mb-2">Prasco Business Hours</h4>
-                    <p className="text-sm">
-                      Monday - Saturday: 9:00 AM - 7:00 PM<br />
-                      Sunday: 10:00 AM - 4:00 PM
-                    </p>
-                  </div>
                 </Card>
               </div>
-
-              {/* Contact Form */}
-              <Card className="p-6 border border-cyan-200">
-                <h3 className="text-xl font-bold mb-6 text-gray-800">Send us a Message</h3>
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-700">Name</label>
-                    <Input
-                      type="text"
-                      value={inquiryForm.name}
-                      onChange={(e) => setInquiryForm({...inquiryForm, name: e.target.value})}
-                      placeholder="Your Name"
-                      required
-                      className="border-gray-300 focus:border-cyan-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-700">Email</label>
-                    <Input
-                      type="email"
-                      value={inquiryForm.email}
-                      onChange={(e) => setInquiryForm({...inquiryForm, email: e.target.value})}
-                      placeholder="your.email@example.com"
-                      required
-                      className="border-gray-300 focus:border-cyan-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-700">Phone</label>
-                    <Input
-                      type="tel"
-                      value={inquiryForm.phone}
-                      onChange={(e) => setInquiryForm({...inquiryForm, phone: e.target.value})}
-                      placeholder="+91 XXXXX XXXXX"
-                      className="border-gray-300 focus:border-cyan-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-gray-700">Message</label>
-                    <textarea
-                      value={inquiryForm.message}
-                      onChange={(e) => setInquiryForm({...inquiryForm, message: e.target.value})}
-                      placeholder="Tell us about your Prasco product requirements..."
-                      rows={4}
-                      required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                    />
-                  </div>
-
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500 hover:from-emerald-600 hover:via-cyan-600 hover:to-blue-600 text-white font-semibold py-3"
-                  >
-                    Send Message to Prasco Team
-                  </Button>
-                </form>
-              </Card>
             </div>
-          </TabsContent>
-        </Tabs>
-      </main>
 
-      {selectedProduct && (
-        <ProductInquiryDialog
-          isOpen={isDialogOpen}
-          onClose={() => setIsDialogOpen(false)}
-          product={selectedProduct}
-          onSubmit={handleInquirySubmit}
-        />
-      )}
-      <Footer />
-    </div>
+
+
+          
+        </TabsContent>
+      </Tabs>
+    </main>
+
+      {
+    selectedProduct && (
+      <ProductInquiryDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        product={selectedProduct}
+        onSubmit={handleInquirySubmit}
+      />
+    )
+  }
+  <Footer />
+    </div >
   );
 };
 

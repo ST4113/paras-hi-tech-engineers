@@ -1,340 +1,71 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ProductCard from "@/components/ProductCard";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 
-interface Product {
-  id: number;
-  name: string;
-  image: string;
-  manufacturer: string;
-  machineType: string;
-  partName: string;
-  model: string;
-  partNumber: string;
-  description: string;
-  category: string;
-  brand: string;
-}
+const productCategories = [
+  {
+    title: "Engine Spares",
+    description: "Durable and high-performance engine spares to keep your heavy machinery running reliably.",
+    image: "https://images.unsplash.com/photo-1581090700227-1e8cfc27c29a?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    title: "Engine Gaskets",
+    description: "Precision-engineered engine gaskets to ensure perfect seals and prevent leaks.",
+    image: "https://images.unsplash.com/photo-1631515243346-df573c408f5d?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    title: "Radiators and Hydraulic Oil Cooler",
+    description: "Reliable radiators and hydraulic oil coolers for superior cooling in all conditions.",
+    image: "https://images.unsplash.com/photo-1617083727145-8ef34c3f3949?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    title: "AC Spares",
+    description: "High-quality AC components designed for maximum efficiency and comfort.",
+    image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    title: "Mining Truck Body Spares",
+    description: "Heavy-duty body parts for mining trucks to ensure strength and reliability in tough environments.",
+    image: "https://images.unsplash.com/photo-1613758947301-78abf354cd83?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    title: "Industrial Electrical Components",
+    description: "Advanced electrical components for robust industrial automation and power needs.",
+    image: "https://images.unsplash.com/photo-1581092787766-8be01c0e7804?q=80&w=2070&auto=format&fit=crop"
+  }
+];
 
 const Products: React.FC = () => {
-  const navigate = useNavigate();
-  const [selectedMachineType, setSelectedMachineType] = useState<string>("all");
-  const [selectedManufacturer, setSelectedManufacturer] = useState<string>("all");
-  const [selectedModel, setSelectedModel] = useState<string>("all");
-  const [selectedPartName, setSelectedPartName] = useState<string>("all");
-
-  // Sample product data based on the provided table
-  const productsData: Product[] = [
-    {
-      id: 1,
-      name: "VOLVO EC 480 Radiator",
-      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
-      manufacturer: "VOLVO",
-      machineType: "EXCAVATOR",
-      partName: "RADIATOR",
-      model: "EC 480",
-      partNumber: "456789",
-      description: "High-quality radiator for VOLVO EC 480 excavator with enhanced cooling capacity.",
-      category: "Cooling Systems",
-      brand: "VOLVO"
-    },
-    {
-      id: 2,
-      name: "VOLVO FMX 460 Condenser",
-      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
-      manufacturer: "VOLVO",
-      machineType: "TIPPER",
-      partName: "CONDENSER",
-      model: "FMX 460",
-      partNumber: "7812345",
-      description: "Premium condenser for VOLVO FMX 460 tipper with superior cooling performance.",
-      category: "Air Conditioning",
-      brand: "VOLVO"
-    },
-    {
-      id: 3,
-      name: "KOMATSU D 155 Radiator",
-      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
-      manufacturer: "KOMATSU",
-      machineType: "DOZER",
-      partName: "RADIATOR",
-      model: "D 155",
-      partNumber: "8765432190",
-      description: "Heavy-duty radiator for KOMATSU D 155 dozer designed for extreme conditions.",
-      category: "Cooling Systems",
-      brand: "KOMATSU"
-    },
-    {
-      id: 4,
-      name: "HITACHI ZAXIS 470 Radiator",
-      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
-      manufacturer: "HITACHI",
-      machineType: "EXCAVATOR",
-      partName: "RADIATOR",
-      model: "ZAXIS 470",
-      partNumber: "2345678",
-      description: "Advanced radiator for HITACHI ZAXIS 470 excavator with optimal cooling efficiency.",
-      category: "Cooling Systems",
-      brand: "HITACHI"
-    },
-    {
-      id: 5,
-      name: "CATERPILLAR 120 K2 Radiator",
-      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
-      manufacturer: "CATERPILLAR",
-      machineType: "MOTOR GRADER",
-      partName: "RADIATOR",
-      model: "120 K2",
-      partNumber: "A9876599",
-      description: "Durable radiator for CATERPILLAR 120 K2 motor grader with enhanced performance.",
-      category: "Cooling Systems",
-      brand: "CATERPILLAR"
-    },
-    {
-      id: 6,
-      name: "VOLVO FMX 460 Blower Motor",
-      image: "https://images.unsplash.com/photo-1659179277258-1f37efdb7d7d?q=80&w=1974&auto=format&fit=crop",
-      manufacturer: "VOLVO",
-      machineType: "TIPPER",
-      partName: "BLOWER MOTOR",
-      model: "FMX 460",
-      partNumber: "2345678",
-      description: "High-performance blower motor for VOLVO FMX 460 tipper with reliable operation.",
-      category: "Air Conditioning",
-      brand: "VOLVO"
-    },
-    {
-      id: 7,
-      name: "VOLVO FMX 460 Evaporator",
-      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
-      manufacturer: "VOLVO",
-      machineType: "TIPPER",
-      partName: "EVAPORATOR",
-      model: "FMX 460",
-      partNumber: "23458768",
-      description: "Premium evaporator for VOLVO FMX 460 tipper with superior cooling performance.",
-      category: "Air Conditioning",
-      brand: "VOLVO"
-    },
-    {
-      id: 8,
-      name: "VOLVO FMX 440 Condenser",
-      image: "https://images.unsplash.com/photo-1627745193246-1fa1c9404b21?q=80&w=2070&auto=format&fit=crop",
-      manufacturer: "VOLVO",
-      machineType: "TIPPER",
-      partName: "CONDENSER",
-      model: "FMX 440",
-      partNumber: "7812345",
-      description: "High-quality condenser for VOLVO FMX 440 tipper with excellent cooling capacity.",
-      category: "Air Conditioning",
-      brand: "VOLVO"
-    },
-    {
-      id: 9,
-      name: "VOLVO FMX 460 Radiator",
-      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
-      manufacturer: "VOLVO",
-      machineType: "TIPPER",
-      partName: "RADIATOR",
-      model: "FMX 460",
-      partNumber: "21649619",
-      description: "Durable radiator for VOLVO FMX 460 tipper with enhanced cooling performance.",
-      category: "Cooling Systems",
-      brand: "VOLVO"
-    },
-    {
-      id: 10,
-      name: "VOLVO FMX 440 Radiator",
-      image: "https://images.unsplash.com/photo-1670261604206-3bdc7d542334?q=80&w=1965&auto=format&fit=crop",
-      manufacturer: "VOLVO",
-      machineType: "TIPPER",
-      partName: "RADIATOR",
-      model: "FMX 440",
-      partNumber: "21649619",
-      description: "Reliable radiator for VOLVO FMX 440 tipper with superior cooling technology.",
-      category: "Cooling Systems",
-      brand: "VOLVO"
-    }
-  ];
-
-  // Get unique values for filters based on selections
-  const machineTypes = [...new Set(productsData.map(product => product.machineType))];
-  
-  const manufacturers = selectedMachineType === "all" 
-    ? [] 
-    : [...new Set(productsData
-        .filter(product => product.machineType === selectedMachineType)
-        .map(product => product.manufacturer))];
-  
-  const models = selectedManufacturer === "all" 
-    ? [] 
-    : [...new Set(productsData
-        .filter(product => 
-          product.machineType === selectedMachineType && 
-          product.manufacturer === selectedManufacturer)
-        .map(product => product.model))];
-  
-  const partNames = selectedModel === "all" 
-    ? [] 
-    : [...new Set(productsData
-        .filter(product => 
-          product.machineType === selectedMachineType && 
-          product.manufacturer === selectedManufacturer &&
-          product.model === selectedModel)
-        .map(product => product.partName))];
-
-  // Filter products based on selected filters
-  const filteredProducts = productsData.filter(product => {
-    const matchesMachineType = selectedMachineType === "all" ? true : product.machineType === selectedMachineType;
-    const matchesManufacturer = selectedManufacturer === "all" ? true : product.manufacturer === selectedManufacturer;
-    const matchesModel = selectedModel === "all" ? true : product.model === selectedModel;
-    const matchesPartName = selectedPartName === "all" ? true : product.partName === selectedPartName;
-    return matchesMachineType && matchesManufacturer && matchesModel && matchesPartName;
-  });
-
-  const handleViewClick = (product: Product) => {
-    navigate(`/product/${product.id}`);
-  };
-
-  const clearFilters = () => {
-    setSelectedMachineType("all");
-    setSelectedManufacturer("all");
-    setSelectedModel("all");
-    setSelectedPartName("all");
-  };
-
-  const handleMachineTypeChange = (value: string) => {
-    setSelectedMachineType(value);
-    setSelectedManufacturer("all");
-    setSelectedModel("all");
-    setSelectedPartName("all");
-  };
-
-  const handleManufacturerChange = (value: string) => {
-    setSelectedManufacturer(value);
-    setSelectedModel("all");
-    setSelectedPartName("all");
-  };
-
-  const handleModelChange = (value: string) => {
-    setSelectedModel(value);
-    setSelectedPartName("all");
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
-      <main className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8 text-navy">Our Products</h1>
-        
-        {/* Filters */}
-        <div className="mb-8 bg-gray-50 p-6 rounded-lg shadow-sm">
-          <h2 className="text-xl font-semibold mb-4 text-navy">Filter Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Machine Type</label>
-              <Select value={selectedMachineType} onValueChange={handleMachineTypeChange}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select Machine Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Machine Types</SelectItem>
-                  {machineTypes.map(machineType => (
-                    <SelectItem key={machineType} value={machineType}>{machineType}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Manufacturer</label>
-              <Select 
-                value={selectedManufacturer} 
-                onValueChange={handleManufacturerChange}
-                disabled={selectedMachineType === "all"}
-              >
-                <SelectTrigger className={`w-full ${selectedMachineType === "all" ? "opacity-50 cursor-not-allowed" : ""}`}>
-                  <SelectValue placeholder="Select Manufacturer" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Manufacturers</SelectItem>
-                  {manufacturers.map(manufacturer => (
-                    <SelectItem key={manufacturer} value={manufacturer}>{manufacturer}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Model</label>
-              <Select 
-                value={selectedModel} 
-                onValueChange={handleModelChange}
-                disabled={selectedManufacturer === "all"}
-              >
-                <SelectTrigger className={`w-full ${selectedManufacturer === "all" ? "opacity-50 cursor-not-allowed" : ""}`}>
-                  <SelectValue placeholder="Select Model" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Models</SelectItem>
-                  {models.map(model => (
-                    <SelectItem key={model} value={model}>{model}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Part Name</label>
-              <Select 
-                value={selectedPartName} 
-                onValueChange={setSelectedPartName}
-                disabled={selectedModel === "all"}
-              >
-                <SelectTrigger className={`w-full ${selectedModel === "all" ? "opacity-50 cursor-not-allowed" : ""}`}>
-                  <SelectValue placeholder="Select Part Name" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Part Names</SelectItem>
-                  {partNames.map(partName => (
-                    <SelectItem key={partName} value={partName}>{partName}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="flex items-end">
-              <Button 
-                variant="outline" 
-                onClick={clearFilters}
-                className="border-navy text-navy hover:bg-navy hover:text-white"
-              >
-                Clear Filters
-              </Button>
+
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <section className="bg-[#143355] text-white py-20 text-center px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Explore Our Product Range</h1>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto">Engineered for performance, durability, and reliability across industries.</p>
+        </section>
+
+        {/* Product Cards */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+              {productCategories.map((item, index) => (
+                <div
+                  key={index}
+                  className="rounded-2xl overflow-hidden shadow-lg border border-[#d3791a] hover:shadow-xl transition-shadow duration-300"
+                >
+                  <img src={item.image} alt={item.title} className="w-full h-56 object-cover" />
+                  <div className="p-6">
+                    <h3 className="text-2xl font-semibold text-[#143355] mb-2">{item.title}</h3>
+                    <p className="text-gray-700 leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-
-        {/* Product Listings */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map(product => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
-                onView={() => handleViewClick(product)} 
-              />
-            ))
-          ) : (
-            <div className="col-span-full text-center py-12">
-              <p className="text-gray-500 text-lg">No products match your selected filters.</p>
-              <Button onClick={clearFilters} variant="link" className="text-orange mt-2">
-                Clear filters to see all products
-              </Button>
-            </div>
-          )}
-        </div>
+        </section>
       </main>
 
       <Footer />

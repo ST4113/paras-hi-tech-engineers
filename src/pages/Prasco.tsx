@@ -7,7 +7,6 @@ import ProductInquiryDialog from "@/components/ProductInquiryDialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Phone, Mail, MapPin, Star, Award, Users, Target, Eye } from "lucide-react";
@@ -235,30 +234,9 @@ const Prasco: React.FC = () => {
       </section>
 
       <main className="flex-grow">
-        <Tabs defaultValue="products" className="container mx-auto px-4 py-12">
-          <TabsList className="grid w-full grid-cols-3 mb-8 bg-gradient-to-r from-emerald-100 via-cyan-100 to-blue-100">
-            <TabsTrigger
-              value="products"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:text-white"
-            >
-              Prasco Products
-            </TabsTrigger>
-            <TabsTrigger
-              value="about"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:text-white"
-            >
-              About Prasco
-            </TabsTrigger>
-            <TabsTrigger
-              value="contact"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:via-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:text-white"
-            >
-              Contact Info
-            </TabsTrigger>
-          </TabsList>
-
-          {/* Products Tab */}
-          <TabsContent value="products" className="space-y-8">
+        <div className="container mx-auto px-4 py-12 space-y-16">
+          {/* Products Section */}
+          <section className="space-y-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
                 Prasco Engineering Excellence
@@ -403,10 +381,10 @@ const Prasco: React.FC = () => {
                 </div>
               )}
             </div>
-          </TabsContent>
+          </section>
 
-          {/* About Tab */}
-          <TabsContent value="about" className="space-y-8">
+          {/* About Section */}
+          <section className="space-y-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
                 About Prasco
@@ -480,10 +458,10 @@ const Prasco: React.FC = () => {
                 </Card>
               </div>
             </div>
-          </TabsContent>
+          </section>
 
-          {/* Contact Tab */}
-          <TabsContent value="contact" className="space-y-8">
+          {/* Contact Section */}
+          <section className="space-y-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent">
                 Connect with Prasco
@@ -492,7 +470,6 @@ const Prasco: React.FC = () => {
             </div>
 
             <div className="flex justify-center py-20 bg-gradient-to-b from-slate-50 to-white">
-              {/* Contact Information */}
               <div className="w-full max-w-5xl px-4">
                 <Card className="p-6 bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 border border-cyan-200">
                   <h3 className="text-xl font-bold mb-6 text-gray-800">Prasco Contact Information</h3>
@@ -529,26 +506,20 @@ const Prasco: React.FC = () => {
                 </Card>
               </div>
             </div>
+          </section>
+        </div>
+      </main>
 
-
-
-          
-        </TabsContent>
-      </Tabs>
-    </main>
-
-      {
-    selectedProduct && (
-      <ProductInquiryDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        product={selectedProduct}
-        onSubmit={handleInquirySubmit}
-      />
-    )
-  }
-  <Footer />
-    </div >
+      {selectedProduct && (
+        <ProductInquiryDialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          product={selectedProduct}
+          onSubmit={handleInquirySubmit}
+        />
+      )}
+      <Footer />
+    </div>
   );
 };
 

@@ -52,7 +52,7 @@ const About: React.FC = () => {
               {[{
                 title: "Manufacturing Facility",
                 description: "State-of-the-art manufacturing equipment ensuring precision and quality",
-                image: "/images/manufacturing.png"
+                image: "/images/manufacturing.png "
               }, {
                 title: "Quality Sourcing",
                 description: "Global Standards, Locally Delivered. Precision-Sourced Components for Peak Industrial Performance",

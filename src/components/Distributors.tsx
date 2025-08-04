@@ -26,7 +26,7 @@ const Distributors = () => {
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center mb-14">
           <h2 className="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">
-            Our Official Distributors
+            Authorized Brands
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Paras Hi Tech Engineers is an authorized distributor for top-tier global manufacturers delivering quality and reliability.

@@ -28,7 +28,7 @@ const Navbar = () => {
               <img
                 src="/images/paras-logo.png"
                 alt="Paras Hi Tech Engineers Logo"
-                className="h-12 w-auto"
+                className="h-16 w-auto"
               />
             </a>
           </div>
@@ -40,12 +40,13 @@ const Navbar = () => {
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "px-3 py-2 text-base font-semibold transition-colors relative group",
+                  "px-4 py-3 text-lg font-bold transition-colors relative group", // increased padding and font size
                   item.href === '/'
                     ? "text-navy"
                     : "text-gray-700 hover:text-orange"
                 )}
               >
+
                 {item.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange transition-all duration-300 group-hover:w-full"></span>
               </a>
@@ -77,19 +78,18 @@ const Navbar = () => {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "px-3 py-2 text-lg font-medium block transition-colors",
+                    "px-4 py-3 text-xl font-semibold block transition-colors", // bigger font on mobile
                     item.href === '/'
                       ? "text-navy"
                       : "text-gray-700 hover:text-orange"
                   )}
                   onClick={toggleMenu}
                 >
+
                   {item.label}
                 </a>
               ))}
-              <Button className="mx-3 text-base bg-orange hover:bg-orange/90 text-white">
-                Request Quote
-              </Button>
+              
             </div>
           </div>
         )}

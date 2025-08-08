@@ -57,21 +57,7 @@ const Hero = () => {
           radiators, and all industrial machine components. Built to last with
           precision engineering.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            onClick={() => navigate("/products")}
-            className="bg-orange hover:bg-orange/90 text-white px-6 py-6 text-base"
-          >
-            Explore Products
-          </Button>
-          <Button
-            onClick={() => navigate("/contact")}
-            variant="outline"
-            className="bg-transparent border-white text-white hover:bg-white/10 px-6 py-6 text-base"
-          >
-            Contact Us <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
+        
       </div>
     </section>
   );

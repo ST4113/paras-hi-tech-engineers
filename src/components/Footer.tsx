@@ -66,7 +66,7 @@ const Footer = () => {
               <div className="flex items-center justify-center md:justify-start">
                 <Linkedin size={18} className="mr-3 flex-shrink-0 text-orange" />
                 <a
-                  href="https://www.linkedin.com/company/paras-hi-tech-engineers/"
+                  href="https://www.linkedin.com/company/paras-hi-tech-engineer"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-orange"

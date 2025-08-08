@@ -286,6 +286,7 @@ const ProductDetail: React.FC = () => {
       <Navbar />
       
       <main className="flex-grow container mx-auto px-4 py-8">
+        <h1 className="sr-only">Product Details: {product.name} | {product.brand}</h1>
         <Button 
           onClick={() => navigate(isPrascoProduct ? '/prasco' : '/products')} 
           variant="outline" 
@@ -313,12 +314,12 @@ const ProductDetail: React.FC = () => {
           {/* Product Details */}
           <div className="space-y-6">
             <div>
-              <h1 className={`text-3xl font-bold mb-2 ${isPrascoProduct ? 
+              <h2 className={`text-3xl font-bold mb-2 ${isPrascoProduct ? 
                 'bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent' : 
                 'text-navy'
               }`}>
                 {product.name}
-              </h1>
+              </h2>
               <p className="text-lg text-gray-600">{product.description}</p>
             </div>
 

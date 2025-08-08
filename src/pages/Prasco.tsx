@@ -234,6 +234,7 @@ const Prasco: React.FC = () => {
       </section>
 
       <main className="flex-grow">
+        <h1 className="sr-only">Prasco Precision Engineering Solutions and Products</h1>
         <div className="container mx-auto px-4 py-12 space-y-16">
           {/* Products Section */}
           <section className="space-y-8">

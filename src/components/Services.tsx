@@ -46,16 +46,12 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-muted/30 dark:bg-muted/10">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Services & Development
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            At Paras Hi Tech Engineers, we deliver reliable solutions for
-            industrial machinery through a blend of product excellence and
-            engineering expertise.
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Services & Development</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            At Paras Hi Tech Engineers, we deliver reliable solutions for industrial machinery through a blend of product excellence and engineering expertise.
           </p>
         </div>
 
@@ -63,35 +59,31 @@ const Services = () => {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="border border-gray-200 bg-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+              className="border border-border bg-card transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
             >
               <CardHeader className="space-y-4">
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-orange/10 text-orange">
                   {service.icon}
                 </div>
-                <CardTitle className="text-lg font-semibold text-gray-800">
+                <CardTitle className="text-lg font-semibold text-foreground">
                   {service.title}
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-600 text-sm leading-relaxed">
-                  {service.description}
-                </CardDescription>
-              </CardContent>
+            <CardContent>
+              <CardDescription className="text-muted-foreground text-sm leading-relaxed">
+                {service.description}
+              </CardDescription>
+            </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* Development Section */}
-        <div className="mt-20 bg-white p-6 md:p-12 rounded-lg shadow-lg border border-gray-100">
+        <div className="mt-20 bg-card p-6 md:p-12 rounded-lg shadow-lg border border-border">
           <div className="flex flex-col md:flex-row items-center gap-10">
             <div className="md:w-2/3">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-                Continuous Development & Innovation
-              </h3>
-              <p className="text-gray-600 mb-6 text-base leading-relaxed">
-                We consistently invest in R&D to enhance product reliability,
-                performance, and sustainability in the industrial space.
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Continuous Development & Innovation</h3>
+              <p className="text-muted-foreground mb-6 text-base leading-relaxed">
+                We consistently invest in R&D to enhance product reliability, performance, and sustainability in the industrial space.
               </p>
               <ul className="space-y-3 text-gray-700 text-sm pl-4 list-disc">
                 <li className="flex items-start gap-2">
@@ -117,7 +109,7 @@ const Services = () => {
               <img
                 src="/images/industrial-innovation.jpg"
                 alt="Industrial Innovation"
-                className="rounded-xl shadow-md w-full h-80 object-cover"
+                className="rounded-xl shadow-lg ring-1 ring-border w-full h-80 object-cover"
               />
             </div>
           </div>

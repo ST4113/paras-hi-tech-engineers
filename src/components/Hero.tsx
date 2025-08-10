@@ -44,20 +44,18 @@ const Hero = () => {
       </div>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-60 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/20 z-10" />
 
       {/* Content */}
       <div className="relative z-20 flex flex-col justify-center items-center text-center h-full px-4 md:px-10">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-4 max-w-3xl">
-          Quality Industrial Machine Spares{" "}
-          <span className="text-orange">For Every Need</span>
-        </h1>
-        <p className="text-gray-200 md:text-lg max-w-2xl mb-8">
-          Your trusted partner for high-quality excavator parts, engine spares,
-          radiators, and all industrial machine components. Built to last with
-          precision engineering.
-        </p>
-        
+        <div className="container mx-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-4 max-w-4xl mx-auto animate-enter">
+            Quality Industrial Machine Spares <span className="text-orange">For Every Need</span>
+          </h1>
+          <p className="text-gray-200 md:text-lg max-w-2xl mx-auto mb-8 animate-fade-in">
+            Your trusted partner for high-quality excavator parts, engine spares, radiators, and all industrial machine components. Built to last with precision engineering.
+          </p>
+        </div>
       </div>
     </section>
   );

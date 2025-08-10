@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 w-full bg-white shadow-md z-50">
+    <header className="sticky top-0 w-full bg-background/80 supports-[backdrop-filter]:bg-background/80 backdrop-blur border-b border-border shadow-sm z-50">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -28,27 +28,23 @@ const Navbar = () => {
               <img
                 src="/images/paras-logo.png"
                 alt="Paras Hi Tech Engineers Logo"
-                className="h-16 w-auto"
+                className="h-14 w-auto drop-shadow-sm"
               />
             </a>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-1 lg:space-x-6">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-4">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "px-4 py-3 text-lg font-bold transition-colors relative group", // increased padding and font size
-                  item.href === '/'
-                    ? "text-navy"
-                    : "text-gray-700 hover:text-orange"
+                  "relative px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors group",
                 )}
               >
-
                 {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-orange transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-4 right-4 h-0.5 origin-left scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100"></span>
               </a>
             ))}
           </nav>
@@ -58,7 +54,8 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-navy focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMenuOpen ? (
                 <X className="block h-6 w-6" aria-hidden="true" />
@@ -71,25 +68,20 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-2 pb-4">
-            <div className="flex flex-col space-y-2">
+          <div className="md:hidden py-2 pb-4 animate-fade-in">
+            <div className="flex flex-col space-y-1 rounded-xl border border-border bg-popover p-2 shadow-sm">
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "px-4 py-3 text-xl font-semibold block transition-colors", // bigger font on mobile
-                    item.href === '/'
-                      ? "text-navy"
-                      : "text-gray-700 hover:text-orange"
+                    "px-4 py-3 text-base font-medium rounded-lg transition-colors text-foreground/80 hover:text-primary hover:bg-muted"
                   )}
                   onClick={toggleMenu}
                 >
-
                   {item.label}
                 </a>
               ))}
-              
             </div>
           </div>
         )}

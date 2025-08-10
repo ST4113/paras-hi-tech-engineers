@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Card, CardContent } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const productCategories = [
   {
@@ -42,26 +44,37 @@ const Products: React.FC = () => {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-[#143355] text-white py-20 text-center px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Explore Our Product Range</h1>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto">Engineered for performance, durability, and reliability across industries.</p>
+        <section className="relative bg-navy text-white">
+          <div className="container mx-auto px-6 py-20 md:py-24 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Explore Our Product Range</h1>
+            <p className="text-lg md:text-xl max-w-3xl mx-auto opacity-90">Engineered for performance, durability, and reliability across industries.</p>
+          </div>
         </section>
 
         {/* Product Cards */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
               {productCategories.map((item, index) => (
-                <div
+                <Card
                   key={index}
-                  className="rounded-2xl overflow-hidden shadow-lg border border-[#d3791a] hover:shadow-xl transition-shadow duration-300"
+                  className="group overflow-hidden rounded-2xl border border-orange/30 bg-white shadow-sm transition-all duration-300 hover:border-orange hover:shadow-lg"
                 >
-                  <img src={item.image} alt={item.title} className="w-full h-56 object-cover" />
-                  <div className="p-6">
-                    <h3 className="text-2xl font-semibold text-[#143355] mb-2">{item.title}</h3>
-                    <p className="text-gray-700 leading-relaxed">{item.description}</p>
+                  <div className="relative">
+                    <AspectRatio ratio={16 / 9}>
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </AspectRatio>
                   </div>
-                </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-semibold text-navy mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>

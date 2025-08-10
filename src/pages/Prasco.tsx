@@ -220,7 +220,7 @@ const Prasco: React.FC = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <img
-              src="/images/prasco.png"
+              src="/images/prasco.webp"
               alt="Prasco Logo"
               className="h-20 mx-auto mb-8 filter brightness-110"
             />
@@ -251,7 +251,7 @@ const Prasco: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
               <div className="rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-300 hover:shadow-xl transition-all duration-300 hover:border-cyan-400">
                 <img 
-                  src="/images/AC-spares.jpg" 
+                  src="/images/AC-spares.webp" 
                   alt="AC Parts" 
                   className="w-full h-56 object-cover"
                 />
@@ -267,7 +267,7 @@ const Prasco: React.FC = () => {
 
               <div className="rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-300 hover:shadow-xl transition-all duration-300 hover:border-cyan-400">
                 <img 
-                  src="/images/radiator.png" 
+                  src="/images/radiator.webp" 
                   alt="Radiator" 
                   className="w-full h-56 object-cover"
                 />
@@ -283,7 +283,7 @@ const Prasco: React.FC = () => {
 
               <div className="rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-300 hover:shadow-xl transition-all duration-300 hover:border-cyan-400">
                 <img 
-                  src="/images/body-parts.jpg" 
+                  src="/images/body-parts.webp" 
                   alt="Mining Truck Parts" 
                   className="w-full h-56 object-cover"
                 />

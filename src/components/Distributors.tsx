@@ -4,19 +4,19 @@ import { cn } from "@/lib/utils";
 const distributors = [
   {
     name: "Mahle Engine Components",
-    logo: "/images/mahle.jpg",
+    logo: "/images/mahle.webp",
   },
   {
     name: "Elring Klinger",
-    logo: "/images/elring.png",
+    logo: "/images/elring.webp",
   },
   {
     name: "Banco Products",
-    logo: "/images/banco.jpg",
+    logo: "/images/banco.webp",
   },
   {
     name: "Prasco",
-    logo: "/images/prasco.png",
+    logo: "/images/prasco.webp",
   },
 ];
 

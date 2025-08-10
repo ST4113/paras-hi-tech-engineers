@@ -81,13 +81,13 @@ const Contact = () => {
                             </p>
                             <div className="flex flex-wrap gap-4">
                                 <a
-                                    href="mailto:marketing@kemosteels.com"
-                                    className="bg-white text-navy px-6 py-2 rounded-lg font-medium hover:bg-navy/10 transition"
+                                    href="mailto:info@parashitech.in"
+                                    className="border border-white text-white px-6 py-2 rounded-lg font-medium hover:bg-white hover:text-navy transition"
                                 >
                                     Send Email
                                 </a>
                                 <a
-                                    href="tel:+917003357003"
+                                    href="tel:+919712442299"
                                     className="border border-white text-white px-6 py-2 rounded-lg font-medium hover:bg-white hover:text-navy transition"
                                 >
                                     Call Now

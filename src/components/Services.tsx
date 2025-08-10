@@ -107,7 +107,7 @@ const Services = () => {
 
             <div className="md:w-1/2 w-full">
               <img
-                src="/images/industrial-innovation.jpg"
+                src="/images/industrial-innovation.webp"
                 alt="Industrial Innovation"
                 className="rounded-xl shadow-lg ring-1 ring-border w-full h-80 object-cover"
               />

@@ -3,27 +3,27 @@ import React from "react";
 const productCategories = [
   {
     title: "Engine Spares",
-    image: "/images/engine-spares.jpg"
+    image: "/images/engine-spares.webp"
   },
   {
     title: "Engine Gaskets",
-    image: "/images/engine-gasket.jpg"
+    image: "/images/engine-gasket.webp"
   },
   {
     title: "Radiators and Hydraulic Oil Cooler",
-    image: "/images/radiator-cooler.jpg"
+    image: "/images/radiator-cooler.webp"
   },
   {
     title: "AC Spares",
-    image: "/images/AC-spares.jpg"
+    image: "/images/AC-spares.webp"
   },
   {
     title: "Mining Truck Body Spares",
-    image: "/images/body-parts.jpg"
+    image: "/images/body-parts.webp"
   },
   {
     title: "Industrial Electrical Components",
-    image: "/images/electrical.jpg"
+    image: "/images/electrical.webp"
   }
 ];
 

@@ -26,9 +26,9 @@ const Navbar = () => {
           <div className="flex-shrink-0 flex items-center">
             <a href="/" className="flex items-center">
               <img
-                src="/images/paras-logo.png"
+                src="/images/paras-logo.webp"
                 alt="Paras Hi Tech Engineers Logo"
-                className="h-14 w-auto drop-shadow-sm"
+                className="h-16 w-auto drop-shadow-sm"
               />
             </a>
           </div>
@@ -40,7 +40,7 @@ const Navbar = () => {
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "relative px-4 py-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors group",
+                  "relative px-4 py-2 text-base font-semibold text-foreground/80 hover:text-primary transition-colors group",
                 )}
               >
                 {item.label}

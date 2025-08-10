@@ -12,7 +12,7 @@ const ContactPage = () => {
         <section 
           className="relative flex items-center justify-center bg-cover bg-center bg-no-repeat py-20 sm:py-24 md:py-32 px-4"
           style={{
-            backgroundImage: 'url("/images/hero-contact.png")',
+            backgroundImage: 'url("/images/hero-contact.webp")',
           }}
         >
           <div className="text-center text-white max-w-2xl">

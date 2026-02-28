@@ -9,6 +9,7 @@ const navItems = [
   { label: 'About Us', href: '/about' },
   { label: 'Prasco', href: '/prasco' },
   { label: 'Contact Us', href: '/contact' },
+  // { label: 'FAQ', href: '/faq' },
 ];
 
 const Navbar = () => {

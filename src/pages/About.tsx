@@ -1,11 +1,24 @@
 import React from 'react';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Helmet } from 'react-helmet';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const About: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-800">
+      <Helmet>
+        <title>About Paras Hi-Tech Engineers | Industrial Machine Parts Supplier</title>
+        <meta
+          name="description"
+          content="Learn about Paras Hi-Tech Engineers - a trusted supplier of industrial machine spares for over 20 years. Specializing in excavator parts, engine spares, radiators, and more."
+        />
+        <meta
+          name="keywords"
+          content="about Paras Hi Tech, industrial parts supplier, company history, excavator specialist, machine parts manufacturer"
+        />
+        <link rel="canonical" href="https://parashitech.in/about" />
+      </Helmet>
       <Navbar />
 
       <main className="flex-grow">

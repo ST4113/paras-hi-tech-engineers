@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Helmet } from "react-helmet";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
@@ -40,13 +41,25 @@ const productCategories = [
 const Products: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Industrial Machine Parts & Spares | Excavator, Engine, Radiators - Paras Hi-Tech</title>
+        <meta
+          name="description"
+          content="Browse our complete range of industrial machine spares including excavator parts, engine spares, radiators, hydraulic coolers, AC components, and electrical parts."
+        />
+        <meta
+          name="keywords"
+          content="excavator parts, engine spares, radiators, hydraulic coolers, AC spares, mining truck parts, electrical components, industrial machine parts"
+        />
+        <link rel="canonical" href="https://parashitech.in/products" />
+      </Helmet>
       <Navbar />
 
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative bg-navy text-white">
           <div className="container mx-auto px-6 py-20 md:py-24 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Explore Our Product Range</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Industrial Machine Parts & Spares</h1>
             <p className="text-lg md:text-xl max-w-3xl mx-auto opacity-90">Engineered for performance, durability, and reliability across industries.</p>
           </div>
         </section>

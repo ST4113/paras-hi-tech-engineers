@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
+import { Helmet } from 'react-helmet';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductInquiryDialog from "@/components/ProductInquiryDialog";
@@ -212,6 +213,18 @@ const Prasco: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50">
+      <Helmet>
+        <title>Prasco Premium Industrial Solutions | Advanced Machine Parts</title>
+        <meta
+          name="description"
+          content="Prasco - Premium precision-engineered industrial solutions. High-quality radiators, coolers, filters, and transmission units for excavators and heavy machinery."
+        />
+        <meta
+          name="keywords"
+          content="Prasco, precision engineering, industrial solutions, radiators, coolers, excavator parts, heavy machinery components, premium parts"
+        />
+        <link rel="canonical" href="https://parashitech.in/prasco" />
+      </Helmet>
       <Navbar />
 
       {/* Hero Section with Prasco Theme */}
@@ -224,6 +237,7 @@ const Prasco: React.FC = () => {
               alt="Prasco Logo"
               className="h-20 mx-auto mb-8 filter brightness-110"
             />
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-white">PRASCO - PRECISION ENGINEERING EXCELLENCE</h1>
             <p className="text-xl mb-4 font-medium text-white/90">DELIVERING EXCELLENCE</p>
             <p className="text-lg mb-8 opacity-90 text-white/80">
               Advanced engineering solutions that set new standards in precision, quality, and innovation.

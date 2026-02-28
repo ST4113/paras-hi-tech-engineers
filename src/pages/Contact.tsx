@@ -1,10 +1,24 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Helmet } from "react-helmet";
 import Contact from "@/components/Contact";
 
 const ContactPage = () => {
   return (
     <div className="min-h-screen">
+      {/* SEO Tags */}
+      <Helmet>
+        <title>Contact Paras Hi-Tech Engineers | Get Industrial Parts Quote</title>
+        <meta
+          name="description"
+          content="Contact Paras Hi-Tech Engineers for excavator parts, radiators, and industrial machinery components. Request a quote, call us, or use WhatsApp for immediate support."
+        />
+        <meta
+          name="keywords"
+          content="contact Paras Hi Tech, industrial parts quote, excavator parts supplier contact, get quote, customer support, WhatsApp, Ahmedabad"
+        />
+        <link rel="canonical" href="https://parashitech.in/contact" />
+      </Helmet>
       <Navbar />
 
       <main>

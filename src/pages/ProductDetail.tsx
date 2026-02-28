@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
+import { Helmet } from 'react-helmet';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { ArrowLeft } from 'lucide-react';
@@ -283,6 +284,18 @@ const ProductDetail: React.FC = () => {
 
   return (
     <div className={`min-h-screen flex flex-col ${isPrascoProduct ? 'bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50' : ''}`}>
+      <Helmet>
+        <title>{product.name} | {product.manufacturer} {product.model} - Buy Online at Paras Hi-Tech</title>
+        <meta
+          name="description"
+          content={`Buy ${product.name} for ${product.machineType}. ${product.description} | Quality assured, direct from manufacturer - Paras Hi-Tech Engineers`}
+        />
+        <meta
+          name="keywords"
+          content={`${product.name}, ${product.manufacturer}, ${product.machineType}, ${product.category}, ${product.partName}, ${product.model}`}
+        />
+        <link rel="canonical" href={`https://parashitech.in/product/${product.id}`} />
+      </Helmet>
       <Navbar />
       
       <main className="flex-grow container mx-auto px-4 py-8">

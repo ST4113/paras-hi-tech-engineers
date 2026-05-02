@@ -25,11 +25,15 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, onView }) => {
   return (
     <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-md">
-      <div className="relative pb-[60%] bg-gray-100">
+      <div className="relative pb-[60%] bg-white">
         <img 
-          src={product.image} 
+          src={product.image || "/images/prasco.webp"} 
           alt={product.name}
-          className="absolute inset-0 w-full h-full object-cover"
+          onError={(event) => {
+            event.currentTarget.onerror = null;
+            event.currentTarget.src = "/images/prasco.webp";
+          }}
+          className="absolute inset-0 w-full h-full object-contain"
         />
       </div>
       <CardHeader className="pb-2">

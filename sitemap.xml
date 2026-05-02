@@ -1,44 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <!-- Home Page -->
   <url>
     <loc>https://parashitech.in/</loc>
-    <lastmod>2025-08-10</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Products Page -->
   <url>
     <loc>https://parashitech.in/products</loc>
-    <lastmod>2025-08-10</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- Prasco Page -->
   <url>
     <loc>https://parashitech.in/prasco</loc>
-    <lastmod>2025-08-10</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- About Us Page -->
   <url>
     <loc>https://parashitech.in/about</loc>
-    <lastmod>2025-08-10</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Contact Us Page -->
   <url>
     <loc>https://parashitech.in/contact</loc>
-    <lastmod>2025-08-10</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-
 </urlset>

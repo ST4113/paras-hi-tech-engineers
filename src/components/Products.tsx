@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const productCategories = [
   {
@@ -27,33 +28,108 @@ const productCategories = [
   }
 ];
 
+interface FeaturedProduct {
+  id: number;
+  part_number: string;
+  sku: string;
+  image_url: string | null;
+  is_featured: number;
+  is_display: number;
+  machine_type: string;
+  manufacturer: string;
+  model: string;
+  part_name: string;
+}
+
 const AutoSlider: React.FC = () => {
+  const [featuredProducts, setFeaturedProducts] = useState<FeaturedProduct[]>([]);
+  const [isFeaturedLoaded, setIsFeaturedLoaded] = useState(false);
+  const navigate = useNavigate();
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+  useEffect(() => {
+    const fetchFeaturedProducts = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/public/featured-products`);
+        const data = await res.json();
+
+        if (Array.isArray(data.items) && data.items.length > 0) {
+          setFeaturedProducts(data.items);
+        }
+      } catch (error) {
+        console.error("Failed to load featured products:", error);
+      } finally {
+        setIsFeaturedLoaded(true);
+      }
+    };
+
+    fetchFeaturedProducts();
+  }, [API_BASE]);
+
+  const generateProductSlug = (product: FeaturedProduct) => {
+    const parts = [
+      product.manufacturer?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+      product.machine_type?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+      product.model?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+      product.part_name?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+      product.part_number?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+      product.id.toString()
+    ].filter(Boolean);
+
+    return parts.join('-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  };
+
+  const getImageUrl = (image_url: string | null) =>
+    image_url ? `${API_BASE}${image_url}` : "/images/prasco.webp";
+
+  const cards = featuredProducts.length > 0 ? [...featuredProducts, ...featuredProducts] : [...productCategories, ...productCategories];
+
   return (
     <section className="py-16 bg-background overflow-hidden">
       <div className="relative w-full">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Products</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Featured Products</h2>
         </div>
 
         <div className="animate-scroll flex w-max gap-6 px-6">
-          {[...productCategories, ...productCategories].map((product, index) => (
-            <div
-              key={index}
-              className="w-[300px] h-[350px] flex-shrink-0 border border-border rounded-2xl overflow-hidden bg-card shadow-sm transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
-            >
-              <div className="h-[200px] w-full overflow-hidden">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  loading="lazy"
-                />
+          {cards.map((item: any, index: number) => {
+            const isFeaturedCard = featuredProducts.length > 0;
+            const imageSrc = isFeaturedCard ? getImageUrl(item.image_url) : item.image;
+            const title = isFeaturedCard ? item.part_number : item.title;
+            const subtitle = isFeaturedCard ? `${item.manufacturer} ${item.machine_type}` : null;
+            const description = isFeaturedCard ? `${item.part_name} · ${item.model}` : null;
+
+            return (
+              <div
+                key={isFeaturedCard ? `${item.id}-${index}` : `static-${index}`}
+                className="w-[300px] h-[350px] flex-shrink-0 border border-border rounded-2xl overflow-hidden bg-white shadow-sm transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
+                onClick={() => {
+                  if (!isFeaturedCard) return;
+                  navigate(`/products/${generateProductSlug(item)}`);
+                }}
+              >
+                <div className="h-[200px] w-full bg-white overflow-hidden flex items-center justify-center">
+                  <img
+                    src={imageSrc}
+                    alt={title}
+                    loading="lazy"
+                    onError={(event) => {
+                      event.currentTarget.onerror = null;
+                      event.currentTarget.src = "/images/prasco.webp";
+                    }}
+                    className="w-full h-full object-contain transition duration-500"
+                  />
+                </div>
+                <div className="p-4 text-left h-[150px] flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-bold text-lg text-foreground leading-snug line-clamp-2">{title}</h3>
+                    {subtitle && <p className="text-sm text-muted-foreground mt-1 line-clamp-1">{subtitle}</p>}
+                  </div>
+                  {description && <p className="text-sm text-gray-600 line-clamp-2">{description}</p>}
+                </div>
               </div>
-              <div className="p-4 text-center h-[150px] flex items-center justify-center">
-                <h3 className="font-bold text-lg text-foreground leading-snug">{product.title}</h3>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -95,9 +95,8 @@ const AutoSlider: React.FC = () => {
           {cards.map((item: any, index: number) => {
             const isFeaturedCard = featuredProducts.length > 0;
             const imageSrc = isFeaturedCard ? getImageUrl(item.image_url) : item.image;
-            const title = isFeaturedCard ? item.part_number : item.title;
-            const subtitle = isFeaturedCard ? `${item.manufacturer} ${item.machine_type}` : null;
-            const description = isFeaturedCard ? `${item.part_name} · ${item.model}` : null;
+            const title = isFeaturedCard ? `${item.part_name} · ${item.model}` : null;
+            const subtitle = isFeaturedCard ? `${item.manufacturer} ${item.machine_type} ${item.part_number}` : null;
 
             return (
               <div
@@ -123,9 +122,8 @@ const AutoSlider: React.FC = () => {
                 <div className="p-4 text-left h-[150px] flex flex-col justify-between">
                   <div>
                     <h3 className="font-bold text-lg text-foreground leading-snug line-clamp-2">{title}</h3>
-                    {subtitle && <p className="text-sm text-muted-foreground mt-1 line-clamp-1">{subtitle}</p>}
+                    {subtitle && <p className="text-sm text-muted-foreground mt-3 line-clamp-1">{subtitle}</p>}
                   </div>
-                  {description && <p className="text-sm text-gray-600 line-clamp-2">{description}</p>}
                 </div>
               </div>
             );

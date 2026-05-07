@@ -123,6 +123,9 @@ const AutoSlider: React.FC = () => {
                   <div>
                     <h3 className="font-bold text-lg text-foreground leading-snug line-clamp-2">{title}</h3>
                     {subtitle && <p className="text-sm text-muted-foreground mt-3 line-clamp-1">{subtitle}</p>}
+                    {isFeaturedCard && item.part_number && (
+                      <p className="text-xs text-muted-foreground mt-2 font-semibold">Part No.: {item.part_number}</p>
+                    )}
                   </div>
                 </div>
               </div>

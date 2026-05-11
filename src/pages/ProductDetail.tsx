@@ -146,11 +146,13 @@ const ProductDetail: React.FC = () => {
           manufacturer: product?.manufacturer,
           model: product?.model,
           part_name: product?.part_name,
+          part_number: product?.part_number,
           comments: form.message
         })
       });
 
-      if (!res.ok) throw new Error();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Failed to send inquiry. Please try again.");
 
       setSuccess("Thank you! Our team will contact you within 24 hours.");
       setForm({
@@ -161,8 +163,8 @@ const ProductDetail: React.FC = () => {
         message: ""
       });
 
-    } catch (error) {
-      setError("Failed to send inquiry. Please try again.");
+    } catch (error: any) {
+      setError(error.message || "Failed to send inquiry. Please try again.");
     } finally {
       setLoading(false);
     }

@@ -4,10 +4,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
 import { Card, CardContent } from "@/components/ui/card";
-import { toast } from "sonner";
 import { motion } from "framer-motion";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+interface GroupedProductRef {
+  id: number;
+  part_number: string;
+}
 
 interface Product {
   id: number;
@@ -18,7 +22,19 @@ interface Product {
   part_name: string;
   sku: string;
   image_url: string;
+  part_group_id?: number | null;
+  part_group_name?: string | null;
+  grouped_part_numbers?: string[];
+  grouped_product_ids?: number[];
+  grouped_products?: GroupedProductRef[];
 }
+
+const getPartNumbers = (product: Product): string[] => {
+  if (Array.isArray(product.grouped_part_numbers) && product.grouped_part_numbers.length > 0) {
+    return product.grouped_part_numbers;
+  }
+  return product.part_number ? [product.part_number] : [];
+};
 
 const ProductDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -38,8 +54,7 @@ const ProductDetail: React.FC = () => {
     message: ""
   });
 
-  // Extract ID from slug (last part after the last hyphen)
-  const productId = slug ? slug.split('-').pop() : null;
+  const productId = slug ? slug.split("-").pop() : null;
 
   useEffect(() => {
     if (productId) {
@@ -52,47 +67,47 @@ const ProductDetail: React.FC = () => {
       const res = await fetch(`${API_BASE}/public/product?id=${productId}`);
       const data = await res.json();
       setProduct(data.product);
-    } catch (error) {
-      console.error('Failed to fetch product:', error);
+    } catch (fetchError) {
+      console.error("Failed to fetch product:", fetchError);
     }
   };
 
-  // Generate SEO slug from product data
-  const generateSlug = (product: Product): string => {
+  const generateSlug = (productData: Product): string => {
     const parts = [
-      product.manufacturer?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-      product.machine_type?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-      product.model?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-      product.part_name?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-      product.part_number?.toLowerCase().replace(/[^a-z0-9]/g, '-'),
-      product.id.toString()
+      productData.manufacturer?.toLowerCase().replace(/[^a-z0-9]/g, "-"),
+      productData.machine_type?.toLowerCase().replace(/[^a-z0-9]/g, "-"),
+      productData.model?.toLowerCase().replace(/[^a-z0-9]/g, "-"),
+      productData.part_name?.toLowerCase().replace(/[^a-z0-9]/g, "-"),
+      productData.part_number?.toLowerCase().replace(/[^a-z0-9]/g, "-"),
+      productData.id.toString()
     ].filter(Boolean);
 
-    return parts.join('-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    return parts.join("-").replace(/-+/g, "-").replace(/^-|-$/g, "");
   };
 
-  // Generate SEO metadata
-  const generateSEOMetadata = (product: Product) => {
-    const title = `${product.manufacturer} ${product.machine_type} ${product.part_name} (Part No: ${product.part_number}) | Paras Hi-Tech Engineers`;
-
-    const description = `Buy genuine ${product.manufacturer} ${product.machine_type} ${product.part_name} part number ${product.part_number} from Paras Hi-Tech Engineers. High quality heavy equipment spare parts for excavators, loaders, dozers and more.`;
+  const generateSEOMetadata = (productData: Product) => {
+    const partNumbers = getPartNumbers(productData);
+    const displayPartNumbers = partNumbers.join(", ");
+    const title = `${productData.manufacturer} ${productData.machine_type} ${productData.part_name} (Part No: ${displayPartNumbers}) | Paras Hi-Tech Engineers`;
+    const description = `Buy genuine ${productData.manufacturer} ${productData.machine_type} ${productData.part_name} part number ${displayPartNumbers} from Paras Hi-Tech Engineers. High quality heavy equipment spare parts for excavators, loaders, dozers and more.`;
 
     const keywords = [
-      product.part_number,
-      product.machine_type,
-      product.manufacturer,
-      product.model,
-      product.part_name,
-      'industrial spare parts',
-      'heavy equipment parts',
-      'construction machinery parts',
-      'excavator parts',
-      'loader parts',
-      'dozer parts'
-    ].join(', ');
+      ...partNumbers,
+      productData.machine_type,
+      productData.manufacturer,
+      productData.model,
+      productData.part_name,
+      productData.part_group_name,
+      "industrial spare parts",
+      "heavy equipment parts",
+      "construction machinery parts",
+      "excavator parts",
+      "loader parts",
+      "dozer parts"
+    ].filter(Boolean).join(", ");
 
-    const canonicalUrl = `${window.location.origin}/products/${generateSlug(product)}`;
-    const imageUrl = product.image_url ? `${API_BASE}${product.image_url}` : `${window.location.origin}/images/prasco.webp`;
+    const canonicalUrl = `${window.location.origin}/products/${generateSlug(productData)}`;
+    const imageUrl = productData.image_url ? `${API_BASE}${productData.image_url}` : `${window.location.origin}/images/prasco.webp`;
 
     return {
       title,
@@ -111,14 +126,16 @@ const ProductDetail: React.FC = () => {
 
   const validate = () => {
     if (!form.name.trim()) return "Full name is required";
-    if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/))
+    if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       return "Please enter a valid email address";
-    if (form.mobile_number.length < 10 || form.mobile_number.length > 15)
-      return "Mobile number must be 10–15 digits";
+    }
+    if (form.mobile_number.length < 10 || form.mobile_number.length > 15) {
+      return "Mobile number must be 10-15 digits";
+    }
     return "";
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -131,6 +148,7 @@ const ProductDetail: React.FC = () => {
 
     try {
       setLoading(true);
+      const partNumbers = product ? getPartNumbers(product) : [];
 
       const res = await fetch(`${API_BASE}/inquiries/product`, {
         method: "POST",
@@ -146,7 +164,7 @@ const ProductDetail: React.FC = () => {
           manufacturer: product?.manufacturer,
           model: product?.model,
           part_name: product?.part_name,
-          part_number: product?.part_number,
+          part_number: partNumbers.join(", "),
           comments: form.message
         })
       });
@@ -162,9 +180,8 @@ const ProductDetail: React.FC = () => {
         mobile_number: "",
         message: ""
       });
-
-    } catch (error: any) {
-      setError(error.message || "Failed to send inquiry. Please try again.");
+    } catch (submitError: any) {
+      setError(submitError.message || "Failed to send inquiry. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -174,6 +191,8 @@ const ProductDetail: React.FC = () => {
 
   const seoData = generateSEOMetadata(product);
   const productImageUrl = product.image_url ? `${API_BASE}${product.image_url}` : "/images/prasco.webp";
+  const partNumbers = getPartNumbers(product);
+  const hasGroup = Boolean(product.part_group_id && partNumbers.length > 1);
 
   const inputClass = `
     w-full
@@ -191,12 +210,11 @@ const ProductDetail: React.FC = () => {
     transition
   `;
 
-  // Generate structured data
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": `${product.manufacturer} ${product.machine_type} ${product.part_name}`,
-    "description": `Genuine ${product.manufacturer} ${product.part_name} for ${product.machine_type} ${product.model}. Part number: ${product.part_number}`,
+    "description": `Genuine ${product.manufacturer} ${product.part_name} for ${product.machine_type} ${product.model}. Part number: ${partNumbers.join(", ")}`,
     "brand": {
       "@type": "Brand",
       "name": product.manufacturer
@@ -218,34 +236,24 @@ const ProductDetail: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-
       <Helmet>
-        {/* Basic Meta Tags */}
         <title>{seoData.title}</title>
         <meta name="description" content={seoData.description} />
         <meta name="keywords" content={seoData.keywords} />
         <link rel="canonical" href={seoData.canonicalUrl} />
-
-        {/* Open Graph Meta Tags */}
         <meta property="og:title" content={seoData.title} />
         <meta property="og:description" content={seoData.description} />
         <meta property="og:image" content={seoData.imageUrl} />
         <meta property="og:url" content={seoData.canonicalUrl} />
         <meta property="og:type" content="product" />
         <meta property="og:site_name" content="Paras Hi-Tech Engineers" />
-
-        {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoData.title} />
         <meta name="twitter:description" content={seoData.description} />
         <meta name="twitter:image" content={seoData.imageUrl} />
-
-        {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Paras Hi-Tech Engineers" />
         <meta name="language" content="English" />
-
-        {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
@@ -254,13 +262,7 @@ const ProductDetail: React.FC = () => {
       <Navbar />
 
       <main className="flex-grow">
-
-        {/* Hero */}
-
-        <section
-          className="relative flex items-center justify-center bg-gradient py-12 sm:py-16 md:py-20 px-4"
-
-        >
+        <section className="relative flex items-center justify-center bg-gradient py-12 sm:py-16 md:py-20 px-4">
           <div className="text-center text-white max-w-2xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight">
               Product <span className="text-orange">Details</span>
@@ -273,19 +275,14 @@ const ProductDetail: React.FC = () => {
 
         <section className="py-16 bg-white">
           <div className="container mx-auto px-6">
-
             <div className="grid md:grid-cols-3 gap-8 items-stretch">
-
               <Card className="h-full md:col-span-2">
                 <CardContent className="p-8 flex flex-col h-full">
-
                   <h2 className="text-2xl font-semibold text-navy mb-6">
                     Product Details
                   </h2>
 
                   <div className="grid md:grid-cols-2 gap-6 items-center">
-
-                    {/* Product Image */}
                     <div
                       ref={imageContainerRef}
                       className="border rounded-lg p-4 bg-white flex justify-center items-center min-h-[320px] md:min-h-[420px] overflow-hidden relative"
@@ -303,7 +300,7 @@ const ProductDetail: React.FC = () => {
                     >
                       <img
                         src={productImageUrl}
-                        alt={`${product.manufacturer} ${product.machine_type} ${product.part_name} - Part ${product.part_number}`}
+                        alt={`${product.manufacturer} ${product.machine_type} ${product.part_name} - Part ${partNumbers.join(", ")}`}
                         onError={(event) => {
                           event.currentTarget.onerror = null;
                           event.currentTarget.src = "/images/prasco.webp";
@@ -318,22 +315,42 @@ const ProductDetail: React.FC = () => {
                             left: zoom.left,
                             top: zoom.top,
                             backgroundImage: `url(${productImageUrl})`,
-                            backgroundSize: `250% 250%`,
+                            backgroundSize: "250% 250%",
                             backgroundPosition: `${zoom.x}% ${zoom.y}%`,
-                            backgroundRepeat: 'no-repeat'
+                            backgroundRepeat: "no-repeat"
                           }}
                         />
                       )}
                     </div>
 
-                    {/* Product Info */}
                     <div className="space-y-4 text-gray-700">
-
                       <div className="grid grid-cols-1 gap-3">
-                        <div className="flex justify-between py-2 border-b border-gray-100">
+                        <div className="flex justify-between py-2 border-b border-gray-100 gap-4">
                           <span className="font-semibold text-navy">Part Number:</span>
-                          <span className="text-gray-800">{product.part_number}</span>
+                          <span className="text-gray-800 text-right">{product.part_number}</span>
                         </div>
+
+                        {hasGroup && (
+                          <div className="py-2 border-b border-gray-100">
+                            <div className="flex justify-between gap-4 mb-2">
+                              <span className="font-semibold text-navy">Grouped Part Numbers:</span>
+                              {product.part_group_name && (
+                                <span className="text-orange text-right">{product.part_group_name}</span>
+                              )}
+                            </div>
+                            <div className="flex flex-wrap justify-end gap-2">
+                              {partNumbers.map((partNumber) => (
+                                <span
+                                  key={partNumber}
+                                  className="inline-flex items-center rounded-full bg-orange/10 px-3 py-1 text-xs font-medium text-orange"
+                                >
+                                  {partNumber}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
                         <div className="flex justify-between py-2 border-b border-gray-100">
                           <span className="font-semibold text-navy">Machine Type:</span>
                           <span className="text-gray-800">{product.machine_type}</span>
@@ -350,19 +367,12 @@ const ProductDetail: React.FC = () => {
                           <span className="font-semibold text-navy">Part Name:</span>
                           <span className="text-gray-800">{product.part_name}</span>
                         </div>
-
                       </div>
-
-
-
                     </div>
-
                   </div>
-
                 </CardContent>
               </Card>
 
-              {/* Inquiry Form */}
               <Card className="h-full">
                 <CardContent className="
                   max-w-xl
@@ -376,20 +386,17 @@ const ProductDetail: React.FC = () => {
                   overflow-hidden
                   flex flex-col h-full
                 ">
-                  {/* Top accent */}
                   <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-navy via-blue-800 to-navy" />
 
-                  {/* Header */}
                   <div className="mb-8">
                     <h3 className="text-3xl font-bold text-navy tracking-tight">
                       Product Inquiry
                     </h3>
                     <p className="text-navy/70 text-sm mt-2">
-                      Inquire about this product and we’ll get back to you shortly.
+                      Inquire about this product and we will get back to you shortly.
                     </p>
                   </div>
 
-                  {/* Alerts */}
                   {error && (
                     <div className="mb-4 rounded-lg bg-red-50 text-red-700 px-4 py-2 text-sm">
                       {error}
@@ -402,7 +409,6 @@ const ProductDetail: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Form */}
                   <motion.form
                     onSubmit={handleSubmit}
                     initial={{ opacity: 0, y: 30 }}
@@ -456,7 +462,6 @@ const ProductDetail: React.FC = () => {
                       className={`${inputClass} resize-none`}
                     />
 
-                    {/* Submit */}
                     <button
                       type="submit"
                       disabled={loading}
@@ -482,12 +487,9 @@ const ProductDetail: React.FC = () => {
                   </motion.form>
                 </CardContent>
               </Card>
-
             </div>
-
           </div>
         </section>
-
       </main>
 
       <Footer />

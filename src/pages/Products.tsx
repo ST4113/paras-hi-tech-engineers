@@ -194,6 +194,34 @@ const Products: React.FC = () => {
 
                 </div>
 
+
+                {/* PART NAME */}
+
+                 <Select
+                  value={selected.part_name || ""}
+                  onValueChange={(v) => handleFilter("part_name", v)}
+                >
+
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Part Name" />
+                  </SelectTrigger>
+
+                  <SelectContent>
+
+                    <SelectItem value="all">All</SelectItem>
+
+                    {filters.part_names.map((i: any) => (
+
+                      <SelectItem key={i.id} value={String(i.id)}>
+                        {i.name}
+                      </SelectItem>
+
+                    ))}
+
+                  </SelectContent>
+
+                </Select>
+
                 {/* MACHINE TYPE */}
 
                 <Select
@@ -274,32 +302,7 @@ const Products: React.FC = () => {
                   </SelectContent>
 
                 </Select>
-                {/* PART NAME */}
-
-                {/* <Select
-                  value={selected.part_name || ""}
-                  onValueChange={(v) => handleFilter("part_name", v)}
-                >
-
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select Part Name" />
-                  </SelectTrigger>
-
-                  <SelectContent>
-
-                    <SelectItem value="all">All</SelectItem>
-
-                    {filters.part_names.map((i: any) => (
-
-                      <SelectItem key={i.id} value={String(i.id)}>
-                        {i.name}
-                      </SelectItem>
-
-                    ))}
-
-                  </SelectContent>
-
-                </Select> */}
+                
 
                 {/* RESET */}
 
@@ -315,8 +318,8 @@ const Products: React.FC = () => {
 
                 </Button>
 
-              </CardContent>
-              <div className="container mb-6 flex items-center justify-between flex-wrap gap-4">
+              
+              {/* <div className="container mb-6 flex items-center justify-between flex-wrap gap-4"> */}
 
                 <p className="text-sm text-muted-foreground">
                   Showing
@@ -330,7 +333,8 @@ const Products: React.FC = () => {
                   parts
                 </p>
 
-              </div>
+              {/* </div> */}
+              </CardContent>
 
             </Card>
 

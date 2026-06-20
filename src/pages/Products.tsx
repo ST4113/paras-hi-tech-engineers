@@ -334,10 +334,8 @@ const Products: React.FC = () => {
                     <CardContent className="p-6">
                       <div className="flex justify-between items-start gap-3 mb-3">
                         <div>
-                          <h3 className="text-lg font-semibold text-navy">{item.part_name}</h3>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {item.manufacturer} {item.machine_type} {item.model}
-                          </p>
+                          <h3 className="text-lg font-semibold text-navy">{item.manufacturer} {item.machine_type} {item.model}</h3>
+                        
                         </div>
 
                         <div className="flex flex-col items-end gap-2">
@@ -345,11 +343,11 @@ const Products: React.FC = () => {
                             variant="secondary"
                             className="bg-navy/10 text-navy border-navy/20"
                           >
-                            {isGroup ? "Group" : "Single"}
+                            {item.part_name}
                           </Badge>
                           {item.part_group_name && (
                             <Badge variant="outline" className="text-xs">
-                              {item.part_group_name}
+                              {item.part_name}
                             </Badge>
                           )}
                         </div>

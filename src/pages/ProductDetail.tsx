@@ -222,16 +222,12 @@ const ProductDetail: React.FC = () => {
     "sku": product.sku || product.part_number,
     "image": seoData.imageUrl,
     "category": `${product.machine_type} Parts`,
-    "manufacturer": product.manufacturer,
+    "manufacturer": {
+      "@type": "Organization",
+      "name": product.manufacturer
+    },
     "model": product.model,
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "Paras Hi-Tech Engineers"
-      }
-    }
+    // No offers included — prices are not provided on this quotation-based site
   };
 
   return (

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { getProductImageUrl } from "@/lib/utils";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
@@ -21,7 +22,7 @@ interface Product {
   model: string;
   part_name: string;
   sku: string;
-  image_url: string;
+  image_url: string | null;
   part_group_id?: number | null;
   part_group_name?: string | null;
   grouped_part_numbers?: string[];
@@ -107,7 +108,7 @@ const ProductDetail: React.FC = () => {
     ].filter(Boolean).join(", ");
 
     const canonicalUrl = `${window.location.origin}/products/${generateSlug(productData)}`;
-    const imageUrl = productData.image_url ? `${API_BASE}${productData.image_url}` : `${window.location.origin}/images/prasco.webp`;
+    const imageUrl = getProductImageUrl(productData.image_url) || `${window.location.origin}/images/prasco.webp`;
 
     return {
       title,
@@ -190,7 +191,7 @@ const ProductDetail: React.FC = () => {
   if (!product) return <div className="p-20 text-center">Loading...</div>;
 
   const seoData = generateSEOMetadata(product);
-  const productImageUrl = product.image_url ? `${API_BASE}${product.image_url}` : "/images/prasco.webp";
+  const productImageUrl = getProductImageUrl(product.image_url) || "/images/prasco.webp";
   const partNumbers = getPartNumbers(product);
   const hasGroup = Boolean(product.part_group_id && partNumbers.length > 1);
 

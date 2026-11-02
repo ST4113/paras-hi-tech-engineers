@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getProductImageUrl } from "@/lib/utils";
 
 interface ProductCategory {
   title: string;
@@ -99,9 +100,6 @@ const AutoSlider: React.FC = () => {
 
     return parts.join("-").replace(/-+/g, "-").replace(/^-|-$/g, "");
   };
-
-  const getImageUrl = (imageUrl: string | null | undefined) =>
-    imageUrl ? `${API_BASE}${imageUrl}` : "/images/prasco.webp";
 
   const featuredCards = featuredProducts.length > 0 ? [...featuredProducts, ...featuredProducts] : [];
 
@@ -244,7 +242,7 @@ const AutoSlider: React.FC = () => {
           {featuredCards.length > 0 ? (
             <div className="animate-scroll flex w-max gap-6 px-6">
               {featuredCards.map((item: any, index: number) => {
-                const imageSrc = getImageUrl(item.image_url);
+                const imageSrc = getProductImageUrl(item.image_url) || "/images/prasco.webp";
                 const title = `${item.part_name} - ${item.model}`;
                 const partNumbers = getPartNumbers(item);
                 const subtitle = `${item.manufacturer} ${item.machine_type}`;

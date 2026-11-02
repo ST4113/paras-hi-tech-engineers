@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
 import { Search, RotateCcw } from "lucide-react";
+import { getProductImageUrl } from "@/lib/utils";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
@@ -320,7 +321,7 @@ const Products: React.FC = () => {
                     <AspectRatio ratio={16 / 9}>
                       <div className="w-full h-full bg-white flex items-center justify-center overflow-hidden">
                         <img
-                          src={item.image_url ? `${API_BASE}${item.image_url}` : "/images/prasco.webp"}
+                          src={getProductImageUrl(item.image_url) || "/images/prasco.webp"}
                           alt={primaryPartNumber}
                           onError={(event) => {
                             event.currentTarget.onerror = null;
